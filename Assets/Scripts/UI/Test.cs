@@ -9,7 +9,7 @@ public class Test : UI_Base
 
     public override void Init()
     {
-        Debug.Log(ui.GetEnumerator());
+        //Debug.Log(ui.GetEnumerator());
         test = Get<UnityEngine.UI.Button>("Button (1)");
 
         BindClickEvent(test.gameObject, testbtn);

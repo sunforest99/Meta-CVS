@@ -9,7 +9,9 @@ public abstract class UI_Base : MonoBehaviour
     /// <summary>
     /// UI 오브젝트들
     /// </summary>
-    [SerializeField] protected List<UnityEngine.Object> ui;
+    [SerializeField] private List<UnityEngine.Object> ui = new List<UnityEngine.Object>();
+
+    [SerializeField] protected Dictionary<string, GameObject> uidic = new Dictionary<string, GameObject>();
 
     /// <summary>
     /// UI 초기화 부분
@@ -21,6 +23,11 @@ public abstract class UI_Base : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        foreach (GameObject obj in ui)
+        {
+            uidic.Add(obj.name, obj);
+        }
+
         Init();
     }
 
@@ -31,15 +38,14 @@ public abstract class UI_Base : MonoBehaviour
     /// <typeparam name="T">componet 이름</typeparam>
     protected T Get<T>(string name) where T : UnityEngine.Object
     {
-        foreach (GameObject obj in ui)
-        {
-            if (obj.name.Equals(name))
-            {
-                T componet = obj.GetComponent<T>();
-                if (componet != null)
-                    return componet;
-            }
-        }
+        GameObject obj;
+        if (uidic.TryGetValue(name, out obj) == false)
+            return null;
+
+        T componet = obj.GetComponent<T>();
+        if (componet != null)
+            return componet;
+            
         return null;
     }
 
