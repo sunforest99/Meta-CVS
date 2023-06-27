@@ -9,6 +9,8 @@ public class UI_Intro : UI_Base
     UnityEngine.UI.Button tutorial;
     UnityEngine.UI.Button setting;
     UnityEngine.UI.Button prev;
+    [SerializeField]
+    TMPro.TMP_InputField[] inputs = new TMPro.TMP_InputField[10];
 
     public override void Init()
     {
@@ -17,12 +19,40 @@ public class UI_Intro : UI_Base
         setting = Get<UnityEngine.UI.Button>("Setting");
         prev = Get<UnityEngine.UI.Button>("Prev");
 
+        for (int i = 1; i <= 10; i++)
+        {
+            inputs[i - 1] = Get<TMPro.TMP_InputField>($"Input{i}");
+            inputs[i - 1].gameObject.SetActive(false);
+        }
+
+        prev.gameObject.SetActive(false);
+
+        inputs[2].onDeselect.AddListener(PhoneNumber);
+        inputs[7].onDeselect.AddListener(PinNumber);
+
         BindClickEvent(enter.gameObject, enterEvt);
         BindClickEvent(tutorial.gameObject, tutEvt);
         BindClickEvent(setting.gameObject, setEvt);
         BindClickEvent(prev.gameObject, preEvt);
     }
 
+    // 휴대폰 번호 사이에 '-' 자동 삽입
+    public void PhoneNumber(string text)
+    {
+        inputs[2].text = $"{uint.Parse(text):0##-####-####}";
+    }
+    public void PinNumber(string text)
+    {
+        if(text.Substring(0,1) != "0")
+            inputs[7].text = $"{uint.Parse(text):##/##}";
+        else 
+            inputs[7].text = $"{uint.Parse(text):0#/##}";
+    }
+    public void StartBtn(PointerEventData eventData) {
+        string cardnumFull = inputs[3].text+inputs[4].text+inputs[5].text+inputs[6].text;
+        UserData udata = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
+       
+    }
     public void enterEvt(PointerEventData eventData)
     {
         Debug.Log("enter");
@@ -54,6 +84,10 @@ public class UI_Intro : UI_Base
             tutorial.gameObject.SetActive(false);
             setting.gameObject.SetActive(false);
             prev.gameObject.SetActive(true);
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                inputs[i].gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -61,6 +95,10 @@ public class UI_Intro : UI_Base
             tutorial.gameObject.SetActive(true);
             setting.gameObject.SetActive(true);
             prev.gameObject.SetActive(false);
+            for (int i = 0; i < inputs.Length; i++)
+            {
+                inputs[i].gameObject.SetActive(false);
+            }
         }
     }
 }
