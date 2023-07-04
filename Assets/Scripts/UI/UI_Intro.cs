@@ -58,8 +58,8 @@ public class UI_Intro : UI_Base
     public void StartBtn(PointerEventData eventData)
     {   
         string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
-        DataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
-        DataMng.SaveUserData();
+        GameMng.I.dataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
+        GameMng.I.dataMng.SaveUserData();
         SceneManager.LoadScene("GameScene");
     }
 
@@ -68,7 +68,7 @@ public class UI_Intro : UI_Base
         Debug.Log("enter");
         try
         {
-            DataMng.userData = DataMng.LoadUserDataFromJson();
+            GameMng.I.dataMng.LoadUserDataFromJson();
             SceneManager.LoadScene("GameScene");
         }
         catch (System.Exception e)

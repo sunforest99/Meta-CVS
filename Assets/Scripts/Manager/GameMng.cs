@@ -21,4 +21,6 @@ public class GameMng : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this);
     }
+
+    public DataMng dataMng = new DataMng();
 }
