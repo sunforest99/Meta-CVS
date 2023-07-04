@@ -9,6 +9,8 @@ public class UI_Intro : UI_Base
     UnityEngine.UI.Button tutorial;
     UnityEngine.UI.Button setting;
     UnityEngine.UI.Button prev;
+    UnityEngine.UI.Button start;
+
     [SerializeField]
     TMPro.TMP_InputField[] inputs = new TMPro.TMP_InputField[10];
 
@@ -18,6 +20,7 @@ public class UI_Intro : UI_Base
         tutorial = Get<UnityEngine.UI.Button>("Tutorial");
         setting = Get<UnityEngine.UI.Button>("Setting");
         prev = Get<UnityEngine.UI.Button>("Prev");
+        start = Get<UnityEngine.UI.Button>("Start");
 
         for (int i = 1; i <= 10; i++)
         {
@@ -26,6 +29,7 @@ public class UI_Intro : UI_Base
         }
 
         prev.gameObject.SetActive(false);
+        start.gameObject.SetActive(false);
 
         inputs[2].onDeselect.AddListener(PhoneNumber);
         inputs[7].onDeselect.AddListener(PinNumber);
@@ -34,6 +38,7 @@ public class UI_Intro : UI_Base
         BindClickEvent(tutorial.gameObject, tutEvt);
         BindClickEvent(setting.gameObject, setEvt);
         BindClickEvent(prev.gameObject, preEvt);
+        BindClickEvent(start.gameObject, StartBtn);
     }
 
     // 휴대폰 번호 사이에 '-' 자동 삽입
@@ -43,20 +48,33 @@ public class UI_Intro : UI_Base
     }
     public void PinNumber(string text)
     {
-        if(text.Substring(0,1) != "0")
+        if (text.Substring(0, 1) != "0")
             inputs[7].text = $"{uint.Parse(text):##/##}";
-        else 
+        else
             inputs[7].text = $"{uint.Parse(text):0#/##}";
     }
-    public void StartBtn(PointerEventData eventData) {
-        string cardnumFull = inputs[3].text+inputs[4].text+inputs[5].text+inputs[6].text;
-        UserData udata = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
-       
+
+    // 태양이가 추가할 내용 : 데이터가 있으면 정보 입력 과정 스킵. *****
+    public void StartBtn(PointerEventData eventData)
+    {   
+        string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
+        DataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
+        DataMng.SaveUserData();
+        SceneManager.LoadScene("GameScene");
     }
+
     public void enterEvt(PointerEventData eventData)
     {
         Debug.Log("enter");
-        btnActive();
+        try
+        {
+            DataMng.userData = DataMng.LoadUserDataFromJson();
+            SceneManager.LoadScene("GameScene");
+        }
+        catch (System.Exception e)
+        {
+            btnActive();
+        }
     }
 
     public void tutEvt(PointerEventData eventData)
@@ -84,6 +102,7 @@ public class UI_Intro : UI_Base
             tutorial.gameObject.SetActive(false);
             setting.gameObject.SetActive(false);
             prev.gameObject.SetActive(true);
+            start.gameObject.SetActive(true);
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i].gameObject.SetActive(true);
@@ -95,6 +114,7 @@ public class UI_Intro : UI_Base
             tutorial.gameObject.SetActive(true);
             setting.gameObject.SetActive(true);
             prev.gameObject.SetActive(false);
+            start.gameObject.SetActive(false);
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i].gameObject.SetActive(false);
