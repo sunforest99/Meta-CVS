@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.XR.Management;
 
 public class NetworkMng : MonoBehaviourPunCallbacks
 {
@@ -21,8 +20,9 @@ public class NetworkMng : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         _Instance = this;
+        DontDestroyOnLoad(this);
+        ConnectToServer();
     }
     public void ConnectToServer()
     {

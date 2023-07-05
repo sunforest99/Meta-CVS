@@ -19,7 +19,9 @@ public class GameMng : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        // NetworkMng.I.ConnectToServer();
         DontDestroyOnLoad(this);
+        Screen.SetResolution(1280, 720, false);
     }
 
     public DataMng dataMng = new DataMng();
