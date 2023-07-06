@@ -70,7 +70,7 @@ public class DataMng
         }
         catch (Exception e)
         {
-            Debug.Log("Json Load Failed");
+            Debug.Log($"Json Load Failed Exception : {e}");
         }
     }
 
