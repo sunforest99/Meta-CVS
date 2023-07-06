@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+
 public class UI_Intro : UI_Base
 {
+    UnityEngine.UI.Button start;
     UnityEngine.UI.Button enter;
     UnityEngine.UI.Button tutorial;
     UnityEngine.UI.Button setting;
-    UnityEngine.UI.Button prev;
-    UnityEngine.UI.Button start;
-
-    [SerializeField]
+    UnityEngine.UI.Button previous;
     TMPro.TMP_InputField[] inputs = new TMPro.TMP_InputField[10];
 
     public override void Init()
@@ -19,7 +18,7 @@ public class UI_Intro : UI_Base
         enter = Get<UnityEngine.UI.Button>("Enter");
         tutorial = Get<UnityEngine.UI.Button>("Tutorial");
         setting = Get<UnityEngine.UI.Button>("Setting");
-        prev = Get<UnityEngine.UI.Button>("Prev");
+        previous = Get<UnityEngine.UI.Button>("Prev");
         start = Get<UnityEngine.UI.Button>("Start");
 
         for (int i = 1; i <= 10; i++)
@@ -28,16 +27,16 @@ public class UI_Intro : UI_Base
             inputs[i - 1].gameObject.SetActive(false);
         }
 
-        prev.gameObject.SetActive(false);
+        previous.gameObject.SetActive(false);
         start.gameObject.SetActive(false);
 
         inputs[2].onDeselect.AddListener(PhoneNumber);
         inputs[7].onDeselect.AddListener(PinNumber);
 
-        BindClickEvent(enter.gameObject, enterEvt);
-        BindClickEvent(tutorial.gameObject, tutEvt);
-        BindClickEvent(setting.gameObject, setEvt);
-        BindClickEvent(prev.gameObject, preEvt);
+        BindClickEvent(enter.gameObject, EnterEvt);
+        BindClickEvent(tutorial.gameObject, TutorialEvt);
+        BindClickEvent(setting.gameObject, SettingEvt);
+        BindClickEvent(previous.gameObject, PreviousEvt);
         BindClickEvent(start.gameObject, StartBtn);
     }
 
@@ -63,34 +62,35 @@ public class UI_Intro : UI_Base
         SceneManager.LoadScene("GameScene");
     }
 
-    public void enterEvt(PointerEventData eventData)
+    public void EnterEvt(PointerEventData eventData)
     {
-        Debug.Log("enter");
         try
         {
             GameMng.I.dataMng.LoadUserDataFromJson();
-            SceneManager.LoadScene("GameScene");
         }
         catch (System.Exception e)
         {
+            Debug.LogError($"Load User Data Failed \n Exception : {e}");
             btnActive();
         }
+        
+        SceneManager.LoadScene("LoadingScene");
     }
 
-    public void tutEvt(PointerEventData eventData)
+    public void TutorialEvt(PointerEventData eventData)
     {
         Debug.Log("tutorial");
         SceneManager.LoadScene("TutorialScene");
     }
 
-    public void setEvt(PointerEventData eventData)
+    public void SettingEvt(PointerEventData eventData)
     {
         Debug.Log("setting");
     }
 
-    public void preEvt(PointerEventData eventData)
+    public void PreviousEvt(PointerEventData eventData)
     {
-        Debug.Log("Prev");
+        Debug.Log("Previous");
         btnActive();
     }
 
@@ -101,7 +101,7 @@ public class UI_Intro : UI_Base
             enter.gameObject.SetActive(false);
             tutorial.gameObject.SetActive(false);
             setting.gameObject.SetActive(false);
-            prev.gameObject.SetActive(true);
+            previous.gameObject.SetActive(true);
             start.gameObject.SetActive(true);
             for (int i = 0; i < inputs.Length; i++)
             {
@@ -113,7 +113,7 @@ public class UI_Intro : UI_Base
             enter.gameObject.SetActive(true);
             tutorial.gameObject.SetActive(true);
             setting.gameObject.SetActive(true);
-            prev.gameObject.SetActive(false);
+            previous.gameObject.SetActive(false);
             start.gameObject.SetActive(false);
             for (int i = 0; i < inputs.Length; i++)
             {
