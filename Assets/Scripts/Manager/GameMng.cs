@@ -25,4 +25,6 @@ public class GameMng : MonoBehaviour
     }
 
     public DataMng dataMng = new DataMng();
+
+    public int coinCount;
 }
