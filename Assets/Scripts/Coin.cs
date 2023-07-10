@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour
     {
         this.pool = pool;
     }
-
+    // 충돌 처리 안됨 -> 고쳐야 함
     public void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Player")) {
             Debug.Log("trigger detected...");

@@ -14,7 +14,7 @@ public class CoinPool : MonoBehaviour
     {
         // Action<T>  bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000);
 
-        pool = new ObjectPool<Coin>(null, OnObject, OnRelease, OnDestroyCoin, maxSize: 30);
+        pool = new ObjectPool<Coin>(OnCreate, OnObject, OnRelease, OnDestroyCoin, maxSize: 30);
 
         for (int i = 0; i < 30; i++)
         {
@@ -25,14 +25,20 @@ public class CoinPool : MonoBehaviour
     public Coin OnCreate()
     {
         Coin obj = Instantiate(coin);
+        obj.SetPool(pool);
+        InitPosition(obj);
+        return obj;
+    }
+    void InitPosition(Coin obj)
+    {
         obj.transform.position = Return_RandomPosition();
         obj.transform.rotation = Quaternion.identity;
         obj.transform.parent = this.transform;
-        return obj;
     }
 
     public void OnObject(Coin obj)
     {
+        InitPosition(obj);
         obj.gameObject.SetActive(true);
     }
     public void OnRelease(Coin obj)
@@ -54,7 +60,7 @@ public class CoinPool : MonoBehaviour
 
         rangeX = Random.Range((rangeX / 2) * -1, rangeX / 2);
         rangeZ = Random.Range((rangeZ / 2) * -1, rangeZ / 2);
-        Vector3 randomPos = new Vector3(rangeX, 7f, rangeZ);
+        Vector3 randomPos = new Vector3(rangeX, 2f, rangeZ);
 
         Vector3 respawnPos = originPos + randomPos;
         return respawnPos;
