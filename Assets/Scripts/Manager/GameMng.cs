@@ -22,9 +22,22 @@ public class GameMng : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(this.transform.parent);
+        dataMng.LoadObjectData();
     }
 
     public DataMng dataMng = new DataMng();
 
     public int coinCount;
+
+    public RaycastHit? Raycast(Transform pos)
+    {
+        int layerMask = 1 << LayerMask.NameToLayer("Object");
+        RaycastHit hit;
+        if (Physics.Raycast(pos.position, pos.forward, out hit, 1000.0f, layerMask))
+        {
+            return hit;
+        }
+
+        return null;
+    }
 }

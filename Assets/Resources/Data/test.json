@@ -13,6 +13,7 @@
             "MAKER_NAME": "농심",
             "GROUP_NAME": "과자류, 빵류 또는 떡류",
             "SERVING_SIZE": "45",
+            "PRICE" : 1500,
             "DESC_KOR": "새우깡"
         },
         {
@@ -28,6 +29,7 @@
             "MAKER_NAME": "해태가루비㈜ 문막제2공장",
             "GROUP_NAME": "과자류, 빵류 또는 떡류",
             "SERVING_SIZE": "30",
+            "PRICE" : 1700,
             "DESC_KOR": "허니버터칩"
         },
         {
@@ -43,6 +45,7 @@
             "MAKER_NAME": "㈜오리온 제4청주공장",
             "GROUP_NAME": "과자류, 빵류 또는 떡류",
             "SERVING_SIZE": "66",
+            "PRICE" : 1700,
             "DESC_KOR": "포카칩 오리지널"
         },
         {
@@ -58,6 +61,7 @@
             "MAKER_NAME": "에듀인터내셔날",
             "GROUP_NAME": "과자류, 빵류 또는 떡류",
             "SERVING_SIZE": "100",
+            "PRICE" : 2000,
             "DESC_KOR": "하리보골드바렌"
         },
         {
@@ -73,6 +77,7 @@
             "MAKER_NAME": "롯데제과㈜",
             "GROUP_NAME": "과자류, 빵류 또는 떡류",
             "SERVING_SIZE": "2",
+            "PRICE" : 1200,
             "DESC_KOR": "자일리톨껌"
         },
         {
@@ -88,6 +93,7 @@
             "MAKER_NAME": "빙그레",
             "GROUP_NAME": "빙과류",
             "SERVING_SIZE": "100",
+            "PRICE" : 1500,
             "DESC_KOR": "메로나"
         },
         {
@@ -103,6 +109,7 @@
             "MAKER_NAME": "롯데제과㈜",
             "GROUP_NAME": "빙과류",
             "SERVING_SIZE": "100",
+            "PRICE" : 2200,
             "DESC_KOR": "월드콘"
         },
         {
@@ -118,6 +125,7 @@
             "MAKER_NAME": "빙그레",
             "GROUP_NAME": "빙과류",
             "SERVING_SIZE": "100",
+            "PRICE" : 3200,
             "DESC_KOR": "투게더"
         },
         {
@@ -133,6 +141,7 @@
             "MAKER_NAME": "대구경북능금농협음료가공공장",
             "GROUP_NAME": "음료류",
             "SERVING_SIZE": "100",
+            "PRICE" : 2000,
             "DESC_KOR": "토레타!"
         },
         {
@@ -148,6 +157,7 @@
             "MAKER_NAME": "롯데칠성음료㈜",
             "GROUP_NAME": "음료류",
             "SERVING_SIZE": "340",
+            "PRICE" : 1500,
             "DESC_KOR": "밀키스"
         },
         {
@@ -163,6 +173,7 @@
             "MAKER_NAME": "도미노피자",
             "GROUP_NAME": "음료류",
             "SERVING_SIZE": "500",
+            "PRICE" : 1700,
             "DESC_KOR": "코카콜라 500ml"
         },
         {
@@ -178,6 +189,7 @@
             "MAKER_NAME": "롯데칠성음료㈜",
             "GROUP_NAME": "음료류",
             "SERVING_SIZE": "250",
+            "PRICE" : 1900,
             "DESC_KOR": "칠성사이다"
         },
         {
@@ -193,6 +205,7 @@
             "MAKER_NAME": "(주)청탑",
             "GROUP_NAME": "즉석식품류",
             "SERVING_SIZE": "150",
+            "PRICE" : 1400,
             "DESC_KOR": "2XL매운치즈볶음밥"
         },
         {
@@ -208,6 +221,7 @@
             "MAKER_NAME": "(주)신세계푸드 오산공장",
             "GROUP_NAME": "즉석식품류",
             "SERVING_SIZE": "105",
+            "PRICE" : 1080,
             "DESC_KOR": "뉴스팸참치마요 삼각김밥"
         },
         {
@@ -223,6 +237,7 @@
             "MAKER_NAME": "롯데푸드㈜ 평택공장",
             "GROUP_NAME": "즉석식품류",
             "SERVING_SIZE": "110",
+            "PRICE" : 1080,
             "DESC_KOR": "전주비빔삼각김밥"
         },
         {
@@ -238,6 +253,7 @@
             "MAKER_NAME": "농심",
             "GROUP_NAME": "면류",
             "SERVING_SIZE": "120",
+            "PRICE" : 1000,
             "DESC_KOR": "신라면"
         },
         {
@@ -253,6 +269,7 @@
             "MAKER_NAME": "오뚜기라면㈜",
             "GROUP_NAME": "면류",
             "SERVING_SIZE": "120",
+            "PRICE" : 950,
             "DESC_KOR": "진라면(순한맛)"
         },
         {
@@ -270,6 +287,7 @@
             "SERVING_SIZE": "120",
             "SAMPLING_MONTH_CD": "AVG",
             "SAMPLING_MONTH_NAME": "평균",
+            "PRICE" : 950,
             "DESC_KOR": "진라면(매운맛)"
         },
         {
@@ -285,6 +303,7 @@
             "MAKER_NAME": "오뚜기",
             "GROUP_NAME": "즉석식품류",
             "SERVING_SIZE": "290",
+            "PRICE" : 2440,
             "DESC_KOR": "맛있는 오뚜기 컵밥 뚝배기불고기밥"
         },
         {
@@ -300,6 +319,7 @@
             "MAKER_NAME": "오뚜기",
             "GROUP_NAME": "즉석식품류",
             "SERVING_SIZE": "267",
+            "PRICE" : 3980,
             "DESC_KOR": "맛있는 오뚜기 컵밥 참치마요덮밥"
         }
     ]

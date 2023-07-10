@@ -5,32 +5,6 @@ using System.IO;
 using System;
 using UnityEditor;
 
-#region  유저 데이터
-[System.Serializable]
-public class UserData
-{
-    public string name;
-    public string phone;
-    public string address;
-    public string cardnum;
-    public string exp;
-    public string cvc;
-    public string pin;
-
-    public UserData() { }
-    public UserData(string name, string phone, string address, string cardnum, string exp, string cvc, string pin)
-    {
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-        this.cardnum = cardnum;
-        this.exp = exp;
-        this.cvc = cvc;
-        this.pin = pin;
-    }
-}
-#endregion
-
 public class DataMng
 {
     public UserData userData = new UserData();

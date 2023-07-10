@@ -1,10 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Photon.Pun;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.EventSystems;
-
 #region 오브젝트_데이터
 [System.Serializable]
 public class ObjectData
@@ -25,6 +18,10 @@ public class ObjectData
     /// 제조사명
     /// </summary>
     public string MAKER_NAME;
+    ///<summary>
+    /// 가격
+    ///</summary> 
+    public int PRICE;
 
     /// <summary>
     /// 열량(kcal)(1회제공량당)
@@ -70,55 +67,29 @@ public class ObjectDatas
     public ObjectData[] row;
 }
 
-[RequireComponent(typeof(Photon.Pun.PhotonView))]
-[RequireComponent(typeof(Photon.Pun.PhotonTransformView))]
-[RequireComponent(typeof(XRGrabInteractable))]
-public class Object : MonoBehaviour
+
+#region  유저 데이터
+[System.Serializable]
+public class UserData
 {
-    #region 네트워크
-    PhotonView view;
-    XRGrabInteractable garbInteractable;
-    #endregion
+    public string name;
+    public string phone;
+    public string address;
+    public string cardnum;
+    public string exp;
+    public string cvc;
+    public string pin;
 
-    Vector3 firstPos = Vector3.zero;
-
-    /// <summary>
-    /// 들고있는지 확인
-    /// </summary>
-    public bool isPicked
+    public UserData() { }
+    public UserData(string name, string phone, string address, string cardnum, string exp, string cvc, string pin)
     {
-        get{
-            return garbInteractable.isSelected;
-        }
-    }
-
-    private void Start()
-    {
-        view = gameObject.GetComponent<PhotonView>();
-        garbInteractable = gameObject.GetComponent<XRGrabInteractable>();
-
-        firstPos = this.transform.position;
-    }
-
-    private void Update()
-    {
-        if (isPicked)
-            view.RPC("GrabNetworkMove", RpcTarget.AllViaServer, transform.position, transform.rotation);
-    }
-
-    [PunRPC]
-    void GrabNetworkMove(Vector3 pos, Quaternion rotation)
-    {
-        transform.position = pos;
-        transform.rotation = rotation;
-    }
-
-    /// <summary>
-    ///  떨어졌을때 위치 초기화
-    /// </summary>
-    void ResetPosition()
-    {
-        this.transform.position = firstPos;
-        this.transform.rotation = Quaternion.identity;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.cardnum = cardnum;
+        this.exp = exp;
+        this.cvc = cvc;
+        this.pin = pin;
     }
 }
+#endregion

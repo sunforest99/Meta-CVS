@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class UI_Intro : UI_Base
 {
@@ -59,7 +58,7 @@ public class UI_Intro : UI_Base
         string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
         GameMng.I.dataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
         GameMng.I.dataMng.SaveUserData();
-        SceneManager.LoadScene("GameScene");
+        LoadingScene.Load("GameScene");
     }
 
     public void EnterEvt(PointerEventData eventData)
@@ -74,13 +73,13 @@ public class UI_Intro : UI_Base
             btnActive();
         }
         
-        SceneManager.LoadScene("LoadingScene");
+        LoadingScene.Load("LoadingScene");
     }
 
     public void TutorialEvt(PointerEventData eventData)
     {
         Debug.Log("tutorial");
-        SceneManager.LoadScene("TutorialScene");
+        LoadingScene.Load("TutorialScene");
     }
 
     public void SettingEvt(PointerEventData eventData)
