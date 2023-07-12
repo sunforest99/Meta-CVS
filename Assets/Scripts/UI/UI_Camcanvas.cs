@@ -36,10 +36,12 @@ public class UI_Camcanvas : UI_Base
     /// <summary>
     ///    룰렛 돌리는 함수
     /// </summary>
-    public void RollEvt(PointerEventData pointerEvent)
-    {
-        rotSpeed = 200.0f;
-        transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
+    public void RollEvt(PointerEventData pointerEvent) {
+        if(GameMng.I.coinCount >= 20) {
+            GameMng.I.coinCount -= 20;
+            rotSpeed = 200.0f;
+            transform.Rotate(rotSpeed*Time.deltaTime,0,0);
+        }
     }
 
     /// <summary>
@@ -53,7 +55,7 @@ public class UI_Camcanvas : UI_Base
         }
         transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
     }
-    
+
     /// <summary>
     ///    룰렛 화면에 보이게 하는 함수
     /// </summary>
