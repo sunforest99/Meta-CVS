@@ -34,8 +34,11 @@ public class UI_Camcanvas : UI_Base
     ///    룰렛 돌리는 함수
     /// </summary>
     public void RollEvt(PointerEventData pointerEvent) {
-        rotSpeed = 200.0f;
-        transform.Rotate(rotSpeed*Time.deltaTime,0,0);
+        if(GameMng.I.coinCount >= 20) {
+            GameMng.I.coinCount -= 20;
+            rotSpeed = 200.0f;
+            transform.Rotate(rotSpeed*Time.deltaTime,0,0);
+        }
     }
     /// <summary>
     ///    룰렛 서서히 멈추는 함수
