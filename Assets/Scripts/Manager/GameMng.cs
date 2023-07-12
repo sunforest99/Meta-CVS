@@ -23,11 +23,13 @@ public class GameMng : MonoBehaviour
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(this.transform.parent);
         dataMng.LoadObjectData();
-        Debug.Log(GameMng.I.dataMng.TryGetObjectValue("새우깡").NUTR_CONT1);
+        // Debug.Log(GameMng.I.dataMng.TryGetObjectValue("새우깡").NUTR_CONT1);
     }
 
     public DataMng dataMng = new DataMng();
 
+    public Dictionary<string, int> basketDict = new Dictionary<string, int>();
+    
     public int coinCount;
 
     public RaycastHit? Raycast(Transform pos)

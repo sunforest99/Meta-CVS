@@ -56,7 +56,8 @@ public abstract class UI_Base : MonoBehaviour
     /// <param name="action">클릭 이벤트 발생 시 호출될 함수</param>
     public void BindClickEvent(GameObject go, Action<PointerEventData> action)
     {
-        Util.GetOrAddComponent<UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster>(go);
+        // TODO: 이거 테스트 해봐야함
+        // Util.GetOrAddComponent<UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster>(go);
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
         evt.OnClickHandler = null;

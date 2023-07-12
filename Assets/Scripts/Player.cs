@@ -8,38 +8,27 @@ public class Player : MonoBehaviour
 {
     [SerializeField] ActionBasedController testinput;
     [SerializeField] Transform tras;
+
+    [SerializeField] UI_ProductInfo productUI;
     void Start()
     {
         testinput.uiPressAction.action.started += started;
     }
 
-    void started(InputAction.CallbackContext context)
+    private void OnEnable()
     {
-        if(GameMng.I.Raycast(tras) != null)
-        {
-            AddUiInfo(GameMng.I.Raycast(tras)?.transform.name);
-            Debug.Log("is clicked");
-        }
+        // TODO : 인풋 이벤트 넣기
     }
 
-    
-    void canceled(InputAction.CallbackContext context)
+    void started(InputAction.CallbackContext context)
     {
-        Debug.Log("is canceled");
-    }
-    
-    /// <summary>
-    /// UI에 상품 정보 넣기
-    /// </summary>
-    /// <param name="name"></param>
-    void AddUiInfo(string name)
-    {
-        ProductData data = GameMng.I.dataMng.TryGetObjectValue(name);
-        Debug.Log(name);
-        Debug.Log(data.DESC_KOR);
-        Debug.Log(data.NUTR_CONT1);
-        Debug.Log(data.NUTR_CONT2);
-        Debug.Log(data.NUTR_CONT3);
-        Debug.Log(data.NUTR_CONT4);
+        if (GameMng.I.Raycast(tras) != null)
+        {
+            productUI.gameObject.SetActive(true);
+            productUI.transform.parent = testinput.transform;
+            productUI.transform.position = testinput.transform.position + new Vector3(0,2.0f, 2.0f);
+            productUI.AddUiInfo(GameMng.I.Raycast(tras)?.transform.name);
+            // Debug.Log("is clicked");
+        }
     }
 }

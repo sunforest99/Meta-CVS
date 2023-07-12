@@ -46,6 +46,8 @@ public class DataMng
         {
             Debug.Log($"Json Load Failed Exception : {e}");
         }
+        
+            Debug.Log("load Data");
     }
 
     /// <summary>
