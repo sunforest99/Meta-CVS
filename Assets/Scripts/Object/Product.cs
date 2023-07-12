@@ -5,11 +5,6 @@ using Photon.Pun;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.EventSystems;
 
-public enum PRODUCT{
-    새우깡,
-    허니버터칩,
-}
-
 [RequireComponent(typeof(Photon.Pun.PhotonView))]
 [RequireComponent(typeof(Photon.Pun.PhotonTransformView))]
 [RequireComponent(typeof(XRGrabInteractable))]
@@ -20,9 +15,7 @@ public class Product : MonoBehaviour
     XRGrabInteractable garbInteractable;
     #endregion
 
-    Vector3 firstPos = Vector3.zero;
-
-    public PRODUCT objname;
+    Vector3 firstPos = Vector3.zero;        // 시작(생성) 위치
 
     /// <summary>
     /// 들고있는지 확인
