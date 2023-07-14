@@ -23,7 +23,6 @@ public class GameMng : MonoBehaviour
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(this.transform.parent);
         dataMng.LoadObjectData();
-        // Debug.Log(GameMng.I.dataMng.TryGetObjectValue("새우깡").NUTR_CONT1);
     }
 
     public DataMng dataMng = new DataMng();
@@ -43,4 +42,46 @@ public class GameMng : MonoBehaviour
 
         return null;
     }
+
+    #region Debug Console
+
+    [SerializeField] GameObject debugConsole;
+    [SerializeField] TMPro.TMP_Text logText;
+    System.Text.StringBuilder logMessage = new System.Text.StringBuilder();
+    [SerializeField] UnityEngine.UI.Scrollbar scroll;
+
+    public void Log(string logMsg, string tag = "Log")
+    {
+        logMessage.Append($" {System.DateTime.Now} {tag} : {logMsg}\n");
+        logText.text = logMessage.ToString();
+        scroll.value = 0.0f;
+    }
+    public void LogError(string logMsg, string tag = "Error")
+    {
+        logMessage.Append($"<color=red>{System.DateTime.Now} {tag} : {logMsg}</color>\n");
+        logText.text = logMessage.ToString();
+        scroll.value = 0.0f;
+    }
+    public void LogWarning(string logMsg, string tag = "Warning")
+    {
+        logMessage.Append($"<color=yellow>{System.DateTime.Now} {tag} : {logMsg}</color>\n");
+        logText.text = logMessage.ToString();
+        scroll.value = 0.0f;
+    }
+
+    public void ShowLog()
+    {
+        debugConsole.SetActive(!debugConsole.activeSelf ? true : false);
+        scroll.value = 0.0f;
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            ShowLog();
+        }
+    }
+
+    #endregion
 }

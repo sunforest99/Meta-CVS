@@ -37,12 +37,13 @@ namespace RootMotion.Demos
 
             // Locomotion speed
             float s = walkSpeed;
-            
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 s = runSpeed;
                 if (f) s *= runForwardSpeedMlp; // Walk faster/slower when moving forward
-            } else
+            }
+            else
             {
                 if (f) s *= walkForwardSpeedMlp; // Run faster/slower when moving forward
             }
@@ -70,10 +71,14 @@ namespace RootMotion.Demos
                     return v.normalized;
                 case InputMode.WASDOnly:
                     Vector3 input = Vector3.zero;
-                    if (Input.GetKey(KeyCode.W)) input += Vector3.forward;
-                    if (Input.GetKey(KeyCode.S)) input += Vector3.back;
-                    if (Input.GetKey(KeyCode.A)) input += Vector3.left;
-                    if (Input.GetKey(KeyCode.D)) input += Vector3.right;
+
+                    if (GetComponent<Photon.Pun.PhotonView>().IsMine)
+                    {
+                        if (Input.GetKey(KeyCode.W)) input += Vector3.forward;
+                        if (Input.GetKey(KeyCode.S)) input += Vector3.back;
+                        if (Input.GetKey(KeyCode.A)) input += Vector3.left;
+                        if (Input.GetKey(KeyCode.D)) input += Vector3.right;
+                    }
                     return input.normalized;
                 default: return Vector3.zero;
             }

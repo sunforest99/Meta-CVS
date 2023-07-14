@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class NetworkMng : MonoBehaviourPunCallbacks
 {
@@ -19,6 +20,8 @@ public class NetworkMng : MonoBehaviourPunCallbacks
         }
     }
 
+    [SerializeField] GameObject playerPrefab;
+
     private void Awake()
     {
         _Instance = this;
@@ -26,15 +29,13 @@ public class NetworkMng : MonoBehaviourPunCallbacks
         ConnectToServer();
     }
 
-    /// <summary>
-    /// 서버(room 접속) 성공시 player생성
-    /// </summary>
-    IEnumerator CreatePlayer()
+    void Start()
     {
-        // TODO : 캐릭터 생성
-        // PhotonNetwork.Instantiate("PlayerVR_1", new Vector3(0, 2, 0), Quaternion.identity, 0);
-
-        yield return null;
+        DefaultPool pool = PhotonNetwork.PrefabPool as DefaultPool;
+        if (pool != null && this.playerPrefab != null)
+        {
+            pool.ResourceCache.Add(playerPrefab.name, playerPrefab);
+        }
     }
 
     /// <summary>
@@ -44,6 +45,7 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     {
         if (Application.internetReachability.Equals(NetworkReachability.NotReachable))
         {
+            GameMng.I.LogError("Network Disconnected", "NetworkMng");
             Debug.LogError("Network Disconnected");
         }
         else
@@ -55,24 +57,29 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     }
 
     #region CallBack
+
     /// <summary>
     /// Master권한으로 서버 연결 callback 함수
     /// </summary>
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Joined Lobby");
-        PhotonNetwork.JoinRandomRoom();      // 렌덤 room 들어가는곳
+        GameMng.I.Log("Joined, Lobby", "NetworkMng");
+
+        PhotonNetwork.JoinRoom("IntroRoom");      // 렌덤 room 들어가는곳
     }
 
     /// <summary>
-    /// 랜덤 방 들어가기 실패 했을때 callback 함수
+    /// 뱅 들어가기 실패했을 때(존재하지 않는 방 접근) callback
     /// </summary>
-    /// <param name="retrunCode">에러 코드</param>
-    /// <param name="message">에러 메시지</param>
-    public override void OnJoinRandomFailed(short retrunCode, string message)
+    /// <param name="returnCode"></param>
+    /// <param name="message"></param>
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("No Room");
-        PhotonNetwork.CreateRoom("myroom");     // 방 생성
+        GameMng.I.Log("Room Join Failed", "NetworkMng");
+        if (SceneManager.GetActiveScene().name == "IntroScene")
+            PhotonNetwork.CreateRoom("IntroRoom");
+        else if (SceneManager.GetActiveScene().name == "MainScene")
+            PhotonNetwork.CreateRoom("MainRoom");
     }
 
     /// <summary>
@@ -88,6 +95,9 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     /// </summary>
     public override void OnJoinedRoom()
     {
+        GameMng.I.Log($"{PhotonNetwork.CurrentRoom.Name}", "NetworkMng");
+        Debug.Log($"<color=red>{PhotonNetwork.CurrentRoom.Name}</color>");
+
         StartCoroutine(this.CreatePlayer());
     }
 
@@ -97,9 +107,40 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     /// <param name="errorInfo"></param>
     public override void OnErrorInfo(ErrorInfo errorInfo)
     {
+        GameMng.I.LogError($"OnErrorInfo : {errorInfo}", "NetworkMng");
         Debug.LogError($"OnErrorInfo : {errorInfo}");
     }
+
     #endregion
+
+    /// <summary>
+    /// 서버(room 접속) 성공시 player생성
+    /// </summary>
+    IEnumerator CreatePlayer()
+    {
+        PhotonNetwork.Instantiate("Player", new Vector3(141.7f, 3.1f, -212.2f), Quaternion.identity, 0);
+        yield return null;
+    }
+
+    /// <summary>
+    /// 룸에 접속 하기 (씬 바꿀때 사용)
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public void JoinRoom(string sceneName)
+    {
+        if (SceneManager.GetActiveScene().name == sceneName)
+            PhotonNetwork.JoinRoom("IntroRoom");
+        else if (SceneManager.GetActiveScene().name == sceneName)
+            PhotonNetwork.JoinRoom("MainRoom");
+    }
+
+    /// <summary>
+    /// 룸 나가기 (씬 바꿀때 사용)
+    /// </summary>
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
 
     private void OnGUI()
     {

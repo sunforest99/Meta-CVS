@@ -11,4 +11,9 @@ public class Util : MonoBehaviour
             component = go.AddComponent<T>();
         return component;
     }
+
+    private void OnGUI()
+    {
+
+    }
 }

@@ -2433,7 +2433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8266308026082204482
 Transform:
   m_ObjectHideFlags: 0
@@ -2623,6 +2623,8 @@ GameObject:
   - component: {fileID: 1909036774}
   - component: {fileID: 1909036775}
   - component: {fileID: 1906558550}
+  - component: {fileID: -6196620557133112655}
+  - component: {fileID: 3750429286193009894}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -2926,9 +2928,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630fef7284f5ea8409d022ec3b28d4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testinput: {fileID: 5864917796678480161}
-  tras: {fileID: 7823917169800448389}
+  leftTriggerInput: {fileID: 5864917796678480161}
+  rightTriggerInput: {fileID: 2646326012781490706}
+  leftTransform: {fileID: 7823917169800448389}
+  rightTransform: {fileID: 1811070818582784217}
   productUI: {fileID: 1290495681}
+  mainCamera: {fileID: 4360578193285672339}
+--- !u!114 &-6196620557133112655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4555291385208431229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3750429286193009894}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &3750429286193009894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4555291385208431229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &4570512075463503518
 GameObject:
   m_ObjectHideFlags: 0

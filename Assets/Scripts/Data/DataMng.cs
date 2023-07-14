@@ -42,12 +42,10 @@ public class DataMng
                 objectdic.Add(data.DESC_KOR, data);
             }
         }
-        catch (Exception e)
+        catch
         {
-            Debug.Log($"Json Load Failed Exception : {e}");
+            Debug.LogError($"Json Load Failed");
         }
-        
-            Debug.Log("load Data");
     }
 
     /// <summary>

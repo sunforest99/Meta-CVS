@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ConvienceStoreScene.unity
     guid: 98dd0078652af5447b48a973a1e9def9
+  - enabled: 1
+    path: Assets/Scenes/DemoScene.unity
+    guid: a6ef4fddb9ec41b4aa33fe415bfb445b
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: a8dfe9769bd5a7240a00a16a5fd3794c
+  - enabled: 1
+    path: Assets/Scenes/Tiny_IntroScene.unity
+    guid: 98b3ae7024d85de4983b2d265ab336d2
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 236e3fd0b74f70a4ea133183b6e52327, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7f4e6bf79c15b39438e6d62811ba1ef2, type: 2}
