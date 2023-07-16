@@ -24,6 +24,8 @@ public class UI_ProductInfo : UI_Base
     // 딕셔너리에 있는 카운트 값 꺼내기
     int tempCount = 0;
 
+    public Transform baseParent;       // 원래 있던 부모
+    
     public override void Init()
     {
         dataText = Get<TMPro.TMP_Text>("Data");
@@ -69,7 +71,6 @@ public class UI_ProductInfo : UI_Base
     {
         try
         {
-            Debug.Log(data.DESC_KOR);
             GameMng.I.basketDict.Add(data.DESC_KOR, count);
         }
         catch
@@ -82,16 +83,18 @@ public class UI_ProductInfo : UI_Base
         }
 
         gameObject.SetActive(false);
+        transform.parent = baseParent;
         Clear();
     }
 
     /// <summary>
-    /// UI 종료
+    /// UI 종료 후 원래 위치로 보내기
     /// </summary>
     /// <param name="pointerEvent"></param>
     public void ExitUI(PointerEventData pointerEvent)
     {
         gameObject.SetActive(false);
+        transform.parent = baseParent;
         Clear();
     }
 
