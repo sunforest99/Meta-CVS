@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Net.Mail;
-
 public class GameMng : MonoBehaviour
 {
     static GameMng _instance;
@@ -25,7 +23,7 @@ public class GameMng : MonoBehaviour
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(this.transform.parent);
         dataMng.LoadObjectData();
-        MailSend();
+        Util.MailSend();
     }
 
     public DataMng dataMng = new DataMng();
@@ -87,33 +85,6 @@ public class GameMng : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             LoadingScene.Load("ConvienceStoreScene");
-        }
-    }
-
-    void MailSend()
-    {
-        MailMessage mail = new MailMessage();
-        try
-        {
-            mail.From = new MailAddress("이메일", "재목", System.Text.Encoding.UTF8);
-            mail.Body = "<html><body>hello wrold</body></html>";
-            mail.IsBodyHtml = true;
-
-            mail.SubjectEncoding = System.Text.Encoding.UTF8;
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
-
-            SmtpClient smtpServer = new SmtpClient("smtp.naver.com");
-            smtpServer.UseDefaultCredentials = false;
-            smtpServer.Port = 587;
-            smtpServer.Credentials = new System.Net.NetworkCredential("아이디", "비밀번호");
-            smtpServer.EnableSsl = true;
-            smtpServer.Send(mail);
-
-            Debug.Log("Send Mail");
-        }
-        catch(System.Exception e)
-        {
-            Debug.LogError(e);
         }
     }
 
