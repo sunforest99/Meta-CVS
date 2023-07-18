@@ -69,11 +69,11 @@ public class NetworkMng : MonoBehaviourPunCallbacks
         GameMng.I.Log("Joined, Lobby", "NetworkMng");
 
         if (SceneManager.GetActiveScene().name == "IntroScene")
-            PhotonNetwork.CreateRoom("IntroRoom");
+            PhotonNetwork.JoinRoom("IntroRoom");
         else if (SceneManager.GetActiveScene().name == "MainScene")
-            PhotonNetwork.CreateRoom("MainRoom");
+            PhotonNetwork.JoinRoom("MainRoom");
         else if (SceneManager.GetActiveScene().name == "ConvienceStoreScene")
-            PhotonNetwork.CreateRoom("ConvienceStoreRoom");
+            PhotonNetwork.JoinRoom("ConvienceStoreRoom");
         // PhotonNetwork.JoinRoom("IntroRoom");      // 렌덤 room 들어가는곳
     }
 

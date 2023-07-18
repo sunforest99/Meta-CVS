@@ -66,14 +66,13 @@ public class UI_Intro : UI_Base
         try
         {
             GameMng.I.dataMng.LoadUserDataFromJson();
+            LoadingScene.Load("MainSceene");
         }
         catch (System.Exception e)
         {
             Debug.LogError($"Load User Data Failed \n Exception : {e}");
             btnActive();
-        }
-        
-        LoadingScene.Load("LoadingScene");
+        }    
     }
 
     public void TutorialEvt(PointerEventData eventData)
