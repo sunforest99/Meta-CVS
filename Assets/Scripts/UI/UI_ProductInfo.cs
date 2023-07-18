@@ -12,7 +12,7 @@ public class UI_ProductInfo : UI_Base
     ProductData data;
 
     TMPro.TMP_Text dataText;
-    TMPro.TMP_Text countText;
+    [SerializeField] TMPro.TMP_Text countText;
 
     Button cancele;
     Button shoopingBasket;

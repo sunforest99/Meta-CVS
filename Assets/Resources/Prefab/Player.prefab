@@ -290,7 +290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1290495680
 RectTransform:
   m_ObjectHideFlags: 0
@@ -398,6 +398,8 @@ MonoBehaviour:
   - {fileID: 3693517179292859876}
   - {fileID: 4910782358781172435}
   - {fileID: 951003185193310517}
+  countText: {fileID: 0}
+  baseParent: {fileID: 0}
 --- !u!114 &1843690961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,6 +2627,7 @@ GameObject:
   - component: {fileID: 1906558550}
   - component: {fileID: -6196620557133112655}
   - component: {fileID: 3750429286193009894}
+  - component: {fileID: 8485429860981065705}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -2788,7 +2791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_System: {fileID: 4249832359246757305}
-  m_MoveSpeed: 1
+  m_MoveSpeed: 10
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_UseGravity: 1
@@ -2891,7 +2894,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4555291385208431229}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.35
   m_Height: 1.8
@@ -2932,6 +2935,7 @@ MonoBehaviour:
   rightTriggerInput: {fileID: 2646326012781490706}
   leftTransform: {fileID: 7823917169800448389}
   rightTransform: {fileID: 1811070818582784217}
+  movement: {fileID: 6783430965343225839}
   productUI: {fileID: 1290495681}
   mainCamera: {fileID: 4360578193285672339}
 --- !u!114 &-6196620557133112655
@@ -2973,6 +2977,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!54 &8485429860981065705
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4555291385208431229}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4570512075463503518
 GameObject:
   m_ObjectHideFlags: 0

@@ -1576,6 +1576,14 @@ PrefabInstance:
       propertyPath: ObservedComponents.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1290495679, guid: 7357867ca8c800541beed77a3479dd3c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360578193285672339, guid: 7357867ca8c800541beed77a3479dd3c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4555291385208431229, guid: 7357867ca8c800541beed77a3479dd3c, type: 3}
       propertyPath: m_Name
       value: Player

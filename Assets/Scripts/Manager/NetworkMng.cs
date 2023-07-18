@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class NetworkMng : MonoBehaviourPunCallbacks
 {
+
+    // TODO : 씬 변경시 전씬에 있던 오브젝트 파괴 안됨
+    
     private static NetworkMng _Instance;
 
     public static NetworkMng I
@@ -19,6 +22,7 @@ public class NetworkMng : MonoBehaviourPunCallbacks
             return _Instance;
         }
     }
+
 
     [SerializeField] GameObject playerPrefab;
 
@@ -50,7 +54,6 @@ public class NetworkMng : MonoBehaviourPunCallbacks
         }
         else
         {
-            // TODO 로그인
             PhotonNetwork.GameVersion = "1.0";      // 게임 버전
             PhotonNetwork.ConnectUsingSettings();   // 서버 연결
         }
@@ -65,7 +68,13 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     {
         GameMng.I.Log("Joined, Lobby", "NetworkMng");
 
-        PhotonNetwork.JoinRoom("IntroRoom");      // 렌덤 room 들어가는곳
+        if (SceneManager.GetActiveScene().name == "IntroScene")
+            PhotonNetwork.CreateRoom("IntroRoom");
+        else if (SceneManager.GetActiveScene().name == "MainScene")
+            PhotonNetwork.CreateRoom("MainRoom");
+        else if (SceneManager.GetActiveScene().name == "ConvienceStoreScene")
+            PhotonNetwork.CreateRoom("ConvienceStoreRoom");
+        // PhotonNetwork.JoinRoom("IntroRoom");      // 렌덤 room 들어가는곳
     }
 
     /// <summary>
@@ -80,6 +89,8 @@ public class NetworkMng : MonoBehaviourPunCallbacks
             PhotonNetwork.CreateRoom("IntroRoom");
         else if (SceneManager.GetActiveScene().name == "MainScene")
             PhotonNetwork.CreateRoom("MainRoom");
+        else if (SceneManager.GetActiveScene().name == "ConvienceStoreScene")
+            PhotonNetwork.CreateRoom("ConvienceStoreRoom");
     }
 
     /// <summary>
@@ -120,18 +131,6 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Instantiate("Player", new Vector3(141.7f, 3.1f, -212.2f), Quaternion.identity, 0);
         yield return null;
-    }
-
-    /// <summary>
-    /// 룸에 접속 하기 (씬 바꿀때 사용)
-    /// </summary>
-    /// <param name="sceneName"></param>
-    public void JoinRoom(string sceneName)
-    {
-        if (SceneManager.GetActiveScene().name == sceneName)
-            PhotonNetwork.JoinRoom("IntroRoom");
-        else if (SceneManager.GetActiveScene().name == sceneName)
-            PhotonNetwork.JoinRoom("MainRoom");
     }
 
     /// <summary>

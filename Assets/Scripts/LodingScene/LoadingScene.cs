@@ -21,7 +21,6 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadScene()
     {
         NetworkMng.I.LeaveRoom();
-        NetworkMng.I.JoinRoom(nextScene);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextScene);
 

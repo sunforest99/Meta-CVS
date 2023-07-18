@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] Transform leftTransform;
     [SerializeField] Transform rightTransform;
+
+    [SerializeField] UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.DynamicMoveProvider movement;
     #endregion
 
     [SerializeField] UI_ProductInfo productUI;
@@ -26,6 +28,9 @@ public class Player : MonoBehaviour
         productUI.baseParent = this.transform;
     }
 
+    /// <summary>
+    /// 네트워크 동기화 + 컨트롤러 동기화
+    /// </summary>
     private void OnEnable()
     {
         view = GetComponent<PhotonView>();
@@ -39,18 +44,22 @@ public class Player : MonoBehaviour
         }
         else
         {
+            movement.enabled = false;
             leftTransform.gameObject.SetActive(false);
             rightTransform.gameObject.SetActive(false);
             this.gameObject.name = "<OtherPlayer>";
         }
     }
 
+    private void OnDisable()
+    {
+        leftTriggerInput.uiPressActionValue.action.started -= started;
+        rightTriggerInput.uiPressActionValue.action.started -= started;
+    }
+
     private void Update()
     {
-        // if (view.IsMine)
-        // {
 
-        // }
     }
 
     /// <summary>

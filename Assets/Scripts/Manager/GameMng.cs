@@ -58,13 +58,13 @@ public class GameMng : MonoBehaviour
     }
     public void LogError(string logMsg, string tag = "Error")
     {
-        logMessage.Append($"<color=red>{System.DateTime.Now} {tag} : {logMsg}</color>\n");
+        logMessage.Append($"<color=red> {System.DateTime.Now:HH:mm:ss} {tag} : {logMsg}</color>\n");
         logText.text = logMessage.ToString();
         scroll.value = 0.0f;
     }
     public void LogWarning(string logMsg, string tag = "Warning")
     {
-        logMessage.Append($"<color=yellow>{System.DateTime.Now} {tag} : {logMsg}</color>\n");
+        logMessage.Append($"<color=yellow> {System.DateTime.Now:HH:mm:ss} {tag} : {logMsg}</color>\n");
         logText.text = logMessage.ToString();
         scroll.value = 0.0f;
     }
@@ -80,6 +80,10 @@ public class GameMng : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             ShowLog();
+        }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            LoadingScene.Load("ConvienceStoreScene");
         }
     }
 
