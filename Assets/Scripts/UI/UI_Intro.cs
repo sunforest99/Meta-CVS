@@ -58,7 +58,7 @@ public class UI_Intro : UI_Base
         string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
         GameMng.I.dataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
         GameMng.I.dataMng.SaveUserData();
-        LoadingScene.Load("GameScene");
+        LoadingScene.Load("MainScene");
     }
 
     public void EnterEvt(PointerEventData eventData)
@@ -66,7 +66,7 @@ public class UI_Intro : UI_Base
         try
         {
             GameMng.I.dataMng.LoadUserDataFromJson();
-            LoadingScene.Load("MainSceene");
+            LoadingScene.Load("MainScene");
         }
         catch (System.Exception e)
         {
