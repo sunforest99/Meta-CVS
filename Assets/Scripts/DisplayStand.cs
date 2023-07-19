@@ -27,7 +27,7 @@ public class DisplayStand : MonoBehaviour
         spawnSizeX.x = (boxCol.bounds.max.x - boxCol.bounds.min.x) / 4;
         spawnSizeZ.z = (boxCol.bounds.max.z - boxCol.bounds.min.z) / 4;
         // 앞쪽, 왼쪽부터 진열되도록 하기.
-        spawnPoint.position = new Vector3(boxCol.bounds.center.x - boxCol.bounds.extents.x, boxCol.bounds.center.y, boxCol.bounds.min.z);
+        spawnPoint.position = new Vector3(boxCol.bounds.center.x - boxCol.bounds.extents.x, boxCol.bounds.center.y + 1, boxCol.bounds.min.z);
         Debug.Log($"X : {spawnSizeX}, Z : {spawnSizeZ}, \nCenter: {boxCol.bounds.center}, Extents: {boxCol.bounds.extents}");
 
         GameObject cloneProduct = null;
@@ -36,6 +36,7 @@ public class DisplayStand : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 cloneProduct = Instantiate(product[i].gameObject, spawnPoint.position + (spawnSizeZ * j), Quaternion.identity) as GameObject;
+                cloneProduct.name = product[i].name;
                 if (spawnPoint.position.z > boxCol.bounds.max.z)
                 {
                     return;
