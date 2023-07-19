@@ -38,8 +38,9 @@ public class Player : MonoBehaviour
         if (view.IsMine)
         {
             this.gameObject.name = "<isMinePlayer>";
-            leftTriggerInput.uiPressActionValue.action.started += started;
-            rightTriggerInput.uiPressActionValue.action.started += started;
+            leftTriggerInput.uiPressAction.action.started += Started;
+            rightTriggerInput.uiPressAction.action.started += Started;
+
             mainCamera.SetActive(true);
         }
         else
@@ -53,8 +54,8 @@ public class Player : MonoBehaviour
 
     private void OnDisable()
     {
-        leftTriggerInput.uiPressActionValue.action.started -= started;
-        rightTriggerInput.uiPressActionValue.action.started -= started;
+        leftTriggerInput.uiPressActionValue.action.started -= Started;
+        rightTriggerInput.uiPressActionValue.action.started -= Started;
     }
 
     private void Update()
@@ -66,14 +67,16 @@ public class Player : MonoBehaviour
     /// Trigger 버튼 눌렀을 때 호출될 이벤트 함수
     /// </summary>
     /// <param name="context"></param>
-    void started(InputAction.CallbackContext context)
+    void Started(InputAction.CallbackContext context)
     {
-        if (context.action.activeControl.path.Equals("/OculusTouchControllerRight/trigger"))     // 오른손 컨트롤러
+        if (context.action.activeControl.path.Equals("/OculusTouchControllerRight/triggerpressed"))     // 오른손 컨트롤러
         {
+            Debug.Log("right");
             SetProductUI(rightTransform);
         }
         else    // 왼손 컨트롤러
         {
+            Debug.Log("left");
             SetProductUI(leftTransform);
         }
     }
