@@ -23,7 +23,7 @@ public class GameMng : MonoBehaviour
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(this.transform.parent);
         dataMng.LoadObjectData();
-        Util.MailSend();
+        // Util.MailSend();
     }
 
     public DataMng dataMng = new DataMng();
@@ -43,6 +43,8 @@ public class GameMng : MonoBehaviour
 
         return null;
     }
+
+    public int totalPrice = 0;
 
     #region Debug Console
 

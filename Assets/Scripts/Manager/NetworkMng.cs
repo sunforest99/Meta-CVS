@@ -7,8 +7,16 @@ using UnityEngine.SceneManagement;
 public class NetworkMng : MonoBehaviourPunCallbacks
 {
 
+    enum Scene
+    {
+        IntroScene,
+        MainScene,
+        ConvienceStoreScene,
+        MAX
+    }
+
     // TODO : 씬 변경시 전씬에 있던 오브젝트 파괴 안됨
-    
+
     private static NetworkMng _Instance;
 
     public static NetworkMng I
@@ -23,6 +31,9 @@ public class NetworkMng : MonoBehaviourPunCallbacks
         }
     }
 
+
+    private Vector3 introPos = new Vector3(35.5f, 0.2f, -52f);
+    private Vector3 mainPos = new Vector3(142.33f, 1.02f, 28.86f);
 
     [SerializeField] GameObject playerPrefab;
 
@@ -68,13 +79,7 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     {
         GameMng.I.Log("Joined, Lobby", "NetworkMng");
 
-        if (SceneManager.GetActiveScene().name == "IntroScene")
-            PhotonNetwork.JoinRoom("IntroRoom");
-        else if (SceneManager.GetActiveScene().name == "MainScene")
-            PhotonNetwork.JoinRoom("MainRoom");
-        else if (SceneManager.GetActiveScene().name == "ConvienceStoreScene")
-            PhotonNetwork.JoinRoom("ConvienceStoreRoom");
-        // PhotonNetwork.JoinRoom("IntroRoom");      // 렌덤 room 들어가는곳
+        PhotonNetwork.JoinRoom(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -85,12 +90,8 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         GameMng.I.Log("Room Join Failed", "NetworkMng");
-        if (SceneManager.GetActiveScene().name == "IntroScene")
-            PhotonNetwork.CreateRoom("IntroRoom");
-        else if (SceneManager.GetActiveScene().name == "MainScene")
-            PhotonNetwork.CreateRoom("MainRoom");
-        else if (SceneManager.GetActiveScene().name == "ConvienceStoreScene")
-            PhotonNetwork.CreateRoom("ConvienceStoreRoom");
+        
+        PhotonNetwork.CreateRoom(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -129,7 +130,8 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     /// </summary>
     IEnumerator CreatePlayer()
     {
-        PhotonNetwork.Instantiate("Player", new Vector3(141.7f, 3.1f, -212.2f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Player", new Vector3(35.5f, 0.2f, -52f), Quaternion.identity, 0);
+
         yield return null;
     }
 
