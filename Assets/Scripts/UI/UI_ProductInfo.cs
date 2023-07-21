@@ -9,7 +9,7 @@ public class UI_ProductInfo : UI_Base
 {
     StringBuilder productString = new StringBuilder();
 
-    ProductData data;
+    Product data;
 
     TMPro.TMP_Text dataText;
     [SerializeField] TMPro.TMP_Text countText;

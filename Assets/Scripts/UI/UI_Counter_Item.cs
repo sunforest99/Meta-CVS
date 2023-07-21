@@ -13,6 +13,10 @@ public class UI_Counter_Item : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    /// <summary>
+    /// 상품 이름, 개수, 개수 * 가격 표시
+    /// </summary>
+    /// <param name="name"></param>
     public void InitProductInfo(string name)
     {
         productName.text = name;
@@ -20,6 +24,9 @@ public class UI_Counter_Item : MonoBehaviour
         price.text = (GameMng.I.dataMng.TryGetObjectValue(name).PRICE * GameMng.I.basketDict[name]).ToString();
     }
 
+    /// <summary>
+    /// 삭제 버튼
+    /// </summary>
     public void DelectBtnAction()
     {
         GameMng.I.basketDict.Remove(productName.text);

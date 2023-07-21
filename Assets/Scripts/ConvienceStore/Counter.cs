@@ -6,70 +6,35 @@ public class Counter : MonoBehaviour
 {
     [SerializeField] GameObject counterUI = null;
 
-    [SerializeField] Transform scrollParent = null;
-    [SerializeField] GameObject itemPrefab = null;
-
-    [SerializeField] TMPro.TextMeshProUGUI resultText = null;
-    [SerializeField] GameObject receipt;
+    [SerializeField] UI_Counter canvas = null;
 
     private void Start()
     {
-        counterUI.SetActive(false);
-        receipt.SetActive(false);
+        canvas = counterUI.GetComponent<UI_Counter>();
     }
 
-    private void OnEnable()
-    {
-        CalcResultPrice();
-    }
-
+    /// <summary>
+    ///  플레이어가 콜라이더 안에 있을 때  결제 창 UI 표시 
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.name.Equals("<isMinePlayer>"))
         {
             counterUI.SetActive(true);
-            SetUICounter();
+            canvas.SetUICounter();
         }
     }
+    
+    /// <summary>
+    /// 플레이어가 콜라이더 밖에 있을 때 결제 창 UI 끄기
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.name.Equals("<isMinePlayer>"))
         {
             counterUI.SetActive(false);
         }
-    }
-
-    void CalcResultPrice()
-    {
-        GameMng.I.totalPrice = 0;
-
-        foreach (string name in GameMng.I.basketDict.Keys)
-        {
-            GameMng.I.totalPrice += (GameMng.I.dataMng.TryGetObjectValue(name).PRICE * GameMng.I.basketDict[name]);
-        }
-
-        resultText.text = GameMng.I.totalPrice.ToString();
-    }
-
-    public void SetUICounter()
-    {
-        // TODO : 나중에 봐서 ObjectPool로 교체하기
-        UI_Counter_Item basketUI = null;
-        foreach (string key in GameMng.I.basketDict.Keys)
-        {
-            basketUI = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity).GetComponent<UI_Counter_Item>();
-            basketUI.transform.SetParent(scrollParent, false);
-            basketUI.InitProductInfo(key);
-        }
-    }
-
-    public void ReceiptOpen() {
-        receipt.SetActive(true);
-        counterUI.SetActive(false);
-        StartCoroutine("CloseReceipt");
-    }
-    IEnumerator CloseReceipt() {
-        yield return new WaitForSeconds(2f);
-        receipt.SetActive(false);
     }
 }

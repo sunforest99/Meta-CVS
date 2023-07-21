@@ -1,6 +1,6 @@
 #region 오브젝트_데이터
 [System.Serializable]
-public class ProductData
+public class Product
 {
     /// <summary>
     /// 품목명
@@ -62,9 +62,9 @@ public class ProductData
 }
 #endregion
 
-public class ProductDatas
+public class ProductData
 {
-    public ProductData[] row;
+    public Product[] row;
 }
 
 

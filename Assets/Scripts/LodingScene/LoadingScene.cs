@@ -12,12 +12,19 @@ public class LoadingScene : MonoBehaviour
         StartCoroutine(LoadScene());
     }
 
+    /// <summary>
+    /// 다음 씬 정해주기
+    /// </summary>
+    /// <param name="scene"></param>
     public static void Load(string scene)
     {
         nextScene = scene;
         SceneManager.LoadScene("LoadingScene");
     }
 
+    /// <summary>
+    /// network 방 나가고 맵 불러오기
+    /// </summary>
     IEnumerator LoadScene()
     {
         NetworkMng.I.LeaveRoom();

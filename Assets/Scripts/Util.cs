@@ -16,12 +16,9 @@ public class Util : MonoBehaviour
         return component;
     }
 
-
-    private void OnGUI()
-    {
-
-    }
-
+    /// <summary>
+    /// 이메일 보내기
+    /// </summary>
     public static void MailSend()
     {
         // UI_Counter_Item ci = new UI_Counter_Item();

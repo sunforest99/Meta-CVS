@@ -24,8 +24,8 @@ public class DataMng
         userData = JsonUtility.FromJson<UserData>(jsonData);
     }
 
-    private ProductDatas objectDatas = new ProductDatas();
-    public Dictionary<string, ProductData> objectdic = new Dictionary<string, ProductData>();
+    private ProductData productData = new ProductData();
+    public Dictionary<string, Product> objectdic = new Dictionary<string, Product>();
 
     /// <summary>
     /// json 로드하여 딕셔너리 만들기
@@ -35,9 +35,9 @@ public class DataMng
         try
         {
             TextAsset json = Resources.Load("Data/test") as TextAsset;
-            objectDatas = JsonUtility.FromJson<ProductDatas>(json.text);
+            productData = JsonUtility.FromJson<ProductData>(json.text);
 
-            foreach (ProductData data in objectDatas.row)
+            foreach (Product data in productData.row)
             {
                 objectdic.Add(data.DESC_KOR, data);
             }
@@ -53,9 +53,9 @@ public class DataMng
     /// 딕셔너리에 있는 값 가져오기
     /// </summary>
     /// <param name="key">아이템 이름</param>
-    public ProductData TryGetObjectValue(string key)
+    public Product TryGetObjectValue(string key)
     {
-        ProductData temp;
+        Product temp;
         objectdic.TryGetValue(key, out temp);
         return temp;
     }

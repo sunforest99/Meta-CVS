@@ -6,15 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class NetworkMng : MonoBehaviourPunCallbacks
 {
-
-    enum Scene
-    {
-        IntroScene,
-        MainScene,
-        ConvienceStoreScene,
-        MAX
-    }
-
     // TODO : 씬 변경시 전씬에 있던 오브젝트 파괴 안됨
 
     private static NetworkMng _Instance;
@@ -30,7 +21,6 @@ public class NetworkMng : MonoBehaviourPunCallbacks
             return _Instance;
         }
     }
-
 
     private Vector3 introPos = new Vector3(35.5f, 0.2f, -52f);
     private Vector3 mainPos = new Vector3(142.33f, 1.02f, 28.86f);

@@ -52,10 +52,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 오브젝트가 꺼질때 이벤트 삭제해주기
+    /// </summary>
     private void OnDisable()
     {
-        leftTriggerInput.uiPressActionValue.action.started -= Started;
-        rightTriggerInput.uiPressActionValue.action.started -= Started;
+        if (view.IsMine)
+        {
+            leftTriggerInput.uiPressActionValue.action.started -= Started;
+            rightTriggerInput.uiPressActionValue.action.started -= Started;
+        }
     }
 
     private void Update()

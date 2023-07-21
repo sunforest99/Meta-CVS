@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Photon.Pun.PhotonView))]
 [RequireComponent(typeof(Photon.Pun.PhotonTransformView))]
 [RequireComponent(typeof(XRGrabInteractable))]
-public class Product : MonoBehaviour
+public class ProductObject : MonoBehaviour
 {
     #region 네트워크
     PhotonView view;

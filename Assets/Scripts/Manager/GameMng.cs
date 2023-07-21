@@ -32,6 +32,11 @@ public class GameMng : MonoBehaviour
     
     public int coinCount;
 
+    /// <summary>
+    /// Raycast Object레이어에서 작동
+    /// </summary>
+    /// <param name="pos">시작위치</param>
+    /// <returns></returns>
     public RaycastHit? Raycast(Transform pos)
     {
         int layerMask = 1 << LayerMask.NameToLayer("Object");
