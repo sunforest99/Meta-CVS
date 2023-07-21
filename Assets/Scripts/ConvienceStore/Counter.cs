@@ -10,10 +10,12 @@ public class Counter : MonoBehaviour
     [SerializeField] GameObject itemPrefab = null;
 
     [SerializeField] TMPro.TextMeshProUGUI resultText = null;
+    [SerializeField] GameObject receipt;
 
     private void Start()
     {
         counterUI.SetActive(false);
+        receipt.SetActive(false);
     }
 
     private void OnEnable()
@@ -59,5 +61,15 @@ public class Counter : MonoBehaviour
             basketUI.transform.SetParent(scrollParent, false);
             basketUI.InitProductInfo(key);
         }
+    }
+
+    public void ReceiptOpen() {
+        receipt.SetActive(true);
+        counterUI.SetActive(false);
+        StartCoroutine("CloseReceipt");
+    }
+    IEnumerator CloseReceipt() {
+        yield return new WaitForSeconds(2f);
+        receipt.SetActive(false);
     }
 }
