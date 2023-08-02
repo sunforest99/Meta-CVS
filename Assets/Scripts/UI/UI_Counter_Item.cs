@@ -8,6 +8,7 @@ public class UI_Counter_Item : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI count;
     [SerializeField] TMPro.TextMeshProUGUI price;
 
+    // TODO : 렉걸리면 오브젝트 풀로 바꾸기
     private void OnDisable()
     {
         Destroy(this.gameObject);

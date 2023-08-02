@@ -11,6 +11,10 @@ public class UI_Intro : UI_Base
     UnityEngine.UI.Button setting;
     UnityEngine.UI.Button previous;
     TMPro.TMP_InputField[] inputs = new TMPro.TMP_InputField[10];
+    
+    Dictionary<string, VirtualTextInputBox> inputBox = new Dictionary<string, VirtualTextInputBox>();
+
+    [SerializeField] VirtualKeyboard keyboard;
 
     public override void Init()
     {
@@ -20,12 +24,17 @@ public class UI_Intro : UI_Base
         previous = Get<UnityEngine.UI.Button>("Prev");
         start = Get<UnityEngine.UI.Button>("Start");
 
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i < 10; i++)
         {
-            inputs[i - 1] = Get<TMPro.TMP_InputField>($"Input{i}");
-            inputs[i - 1].gameObject.SetActive(false);
+            inputs[i] = Get<TMPro.TMP_InputField>($"Input{i + 1}");
+            inputBox.Add(inputs[i].name, inputs[i].GetComponent<VirtualTextInputBox>());
+            
+            inputs[i].gameObject.SetActive(false);
+
+            BindClickEvent(inputs[i].gameObject, FieldClick);
         }
 
+        keyboard.gameObject.SetActive(false);
         previous.gameObject.SetActive(false);
         start.gameObject.SetActive(false);
 
@@ -37,62 +46,92 @@ public class UI_Intro : UI_Base
         BindClickEvent(setting.gameObject, SettingEvt);
         BindClickEvent(previous.gameObject, PreviousEvt);
         BindClickEvent(start.gameObject, StartBtn);
+
+    }
+
+    void FieldClick(PointerEventData eventData)
+    {
+        for(int i = 0; i < inputs.Length; i++)
+        {
+            if(inputs[i].isFocused)
+            {
+                keyboard.TextInputBox = inputBox[inputs[i].name];
+            }
+        }
     }
 
     // 휴대폰 번호 사이에 '-' 자동 삽입
-    public void PhoneNumber(string text)
+    void PhoneNumber(string text)
     {
-        inputs[2].text = $"{uint.Parse(text):0##-####-####}";
+        try
+        {
+            inputs[2].text = $"{uint.Parse(text):0##-####-####}";
+        }
+        catch
+        {
+            inputs[2].text = text;
+        }
     }
-    public void PinNumber(string text)
+    void PinNumber(string text)
     {
-        if (text.Substring(0, 1) != "0")
-            inputs[7].text = $"{uint.Parse(text):##/##}";
-        else
-            inputs[7].text = $"{uint.Parse(text):0#/##}";
+        try
+        {
+            if (text.Substring(0, 1) != "0")
+                inputs[7].text = $"{uint.Parse(text):##/##}";
+            else
+                inputs[7].text = $"{uint.Parse(text):0#/##}";
+        }
+        catch
+        {
+            inputs[7].text = text;
+        }
     }
 
     // 태양이가 추가할 내용 : 데이터가 있으면 정보 입력 과정 스킵. *****
-    public void StartBtn(PointerEventData eventData)
-    {   
+    void StartBtn(PointerEventData eventData)
+    {
         string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
         GameMng.I.dataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
         GameMng.I.dataMng.SaveUserData();
         LoadingScene.Load("MainScene");
     }
 
-    public void EnterEvt(PointerEventData eventData)
+    void EnterEvt(PointerEventData eventData)
     {
         try
         {
             GameMng.I.dataMng.LoadUserDataFromJson();
             LoadingScene.Load("MainScene");
         }
+        catch (System.IO.FileNotFoundException)
+        {
+            Debug.LogWarning($"Load User File Not Found");
+            btnActive();
+        }
         catch (System.Exception e)
         {
             Debug.LogError($"Load User Data Failed \n Exception : {e}");
-            btnActive();
-        }    
+        }
     }
 
-    public void TutorialEvt(PointerEventData eventData)
+    void TutorialEvt(PointerEventData eventData)
     {
         Debug.Log("tutorial");
         LoadingScene.Load("TutorialScene");
     }
 
-    public void SettingEvt(PointerEventData eventData)
+    void SettingEvt(PointerEventData eventData)
     {
         Debug.Log("setting");
     }
 
-    public void PreviousEvt(PointerEventData eventData)
+    void PreviousEvt(PointerEventData eventData)
     {
         Debug.Log("Previous");
         btnActive();
     }
 
-    public void btnActive()
+    void btnActive()
     {
         if (enter.gameObject.activeSelf)
         {
@@ -101,6 +140,7 @@ public class UI_Intro : UI_Base
             setting.gameObject.SetActive(false);
             previous.gameObject.SetActive(true);
             start.gameObject.SetActive(true);
+            keyboard.gameObject.SetActive(true);
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i].gameObject.SetActive(true);
@@ -113,6 +153,7 @@ public class UI_Intro : UI_Base
             setting.gameObject.SetActive(true);
             previous.gameObject.SetActive(false);
             start.gameObject.SetActive(false);
+            keyboard.gameObject.SetActive(false);
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i].gameObject.SetActive(false);
