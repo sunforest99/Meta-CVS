@@ -145,17 +145,7 @@ MonoBehaviour:
   - {fileID: 177777592677304565}
   - {fileID: 177777592495958427}
   - {fileID: 177777591782102718}
-  inputs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  keyboard: {fileID: 0}
 --- !u!1 &177777591360062471
 GameObject:
   m_ObjectHideFlags: 0

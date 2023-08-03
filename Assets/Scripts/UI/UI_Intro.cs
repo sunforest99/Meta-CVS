@@ -90,7 +90,14 @@ public class UI_Intro : UI_Base
     // 태양이가 추가할 내용 : 데이터가 있으면 정보 입력 과정 스킵. *****
     void StartBtn(PointerEventData eventData)
     {
+        int count = 0;
         string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
+        for(int i = 0; i<inputs.Length; i++) {
+            string content = inputs[i].text;
+            if(content.Length == 0)
+                count += 1;
+        }
+        if(count > 0) return;
         GameMng.I.dataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
         GameMng.I.dataMng.SaveUserData();
         LoadingScene.Load("MainScene");

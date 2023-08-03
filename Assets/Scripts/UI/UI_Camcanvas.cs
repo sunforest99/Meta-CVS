@@ -11,6 +11,7 @@ public class UI_Camcanvas : UI_Base
     UnityEngine.UI.Button quit;
     UnityEngine.UI.RawImage roullette;
     float rotSpeed = 0.0f;
+    bool rotState = false;
 
     public override void Init()
     {
@@ -35,18 +36,23 @@ public class UI_Camcanvas : UI_Base
     /// </summary>
     void Update()
     {
-        coinText.text = "Coin : " + GameMng.I.coinCount;
+        coinText.text = "Coin : " + GameMng.I.coinCount; 
+        if(GameMng.I.coinCount >= 0) {
+            if(rotSpeed == 300f)
+                roullette.gameObject.transform.Rotate(0, 0, rotSpeed * Time.deltaTime);
+        }
+        if(rotState == false && rotSpeed != 0.0f) {
+            rotSpeed -= 1f;
+            roullette.gameObject.transform.Rotate(0, 0, rotSpeed * Time.deltaTime);
+        }
     }
 
     /// <summary>
     ///    룰렛 돌리는 함수
     /// </summary>
     public void RollEvent(PointerEventData eventData) {
-        if(GameMng.I.coinCount >= 20) {
-            GameMng.I.coinCount -= 20;
-            rotSpeed = 200.0f;
-            transform.Rotate(rotSpeed*Time.deltaTime,0,0);
-        }
+        rotSpeed = 300f;
+        rotState = true;
     }
 
     /// <summary>
@@ -54,13 +60,8 @@ public class UI_Camcanvas : UI_Base
     /// </summary>
     public void StopRollEvent(PointerEventData eventData)
     {
-        while (rotSpeed != 0.0f)
-        {
-            rotSpeed -= 10.0f;
-        }
-        transform.Rotate(rotSpeed * Time.deltaTime, 0, 0);
+        rotState = false;
         // 당첨된 것 이미지 띄우기
-
     }
     /// <summary>
     ///    룰렛 화면에 보이게 하는 함수
