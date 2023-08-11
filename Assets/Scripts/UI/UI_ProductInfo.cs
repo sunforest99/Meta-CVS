@@ -12,6 +12,7 @@ public class UI_ProductInfo : UI_Base
     Product data;
 
     TMPro.TMP_Text dataText;
+    TMPro.TMP_Text productName;
     [SerializeField] TMPro.TMP_Text countText;
 
     Button cancele;
@@ -30,6 +31,7 @@ public class UI_ProductInfo : UI_Base
     {
         dataText = Get<TMPro.TMP_Text>("Data");
         countText = Get<TMPro.TMP_Text>("Count");
+        productName = Get<TMPro.TMP_Text>("Name");
         cancele = Get<Button>("Exit");
         shoopingBasket = Get<Button>("Basket");
         addCount = Get<Button>("AddCount");
@@ -107,6 +109,7 @@ public class UI_ProductInfo : UI_Base
 
         data = GameMng.I.dataMng.TryGetObjectValue(name);
 
+        productName.text = data.DESC_KOR;
         productString.Append($"1회제공량 :\t{data.SERVING_SIZE} \n");
         productString.Append($"열량 :\t{data.NUTR_CONT1} (kcal)\n");
         productString.Append($"탄수화물 :\t{data.NUTR_CONT2} (g)\n");

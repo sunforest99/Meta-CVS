@@ -8,7 +8,7 @@ public class UI_Counter : UI_Base
     [SerializeField] Transform scrollParent = null;
     [SerializeField] GameObject itemPrefab = null;
     [SerializeField] GameObject receipt;
-    
+
     TMPro.TextMeshProUGUI resultText = null;
     UnityEngine.UI.Button exitButton = null;
     UnityEngine.UI.Button payButton = null;
@@ -36,14 +36,20 @@ public class UI_Counter : UI_Base
     /// </summary>
     void CalcResultPrice()
     {
-        GameMng.I.totalPrice = 0;
-
-        foreach (string name in GameMng.I.basketDict.Keys)
+        try
         {
-            GameMng.I.totalPrice += (GameMng.I.dataMng.TryGetObjectValue(name).PRICE * GameMng.I.basketDict[name]);
-        }
+            GameMng.I.totalPrice = 0;
 
-        resultText.text = GameMng.I.totalPrice.ToString();
+            foreach (string name in GameMng.I.basketDict.Keys)
+            {
+                GameMng.I.totalPrice += (GameMng.I.dataMng.TryGetObjectValue(name).PRICE * GameMng.I.basketDict[name]);
+            }
+
+            resultText.text = GameMng.I.totalPrice.ToString();
+        }
+        catch{
+            Debug.Log("no items");
+        }
     }
 
     /// <summary>

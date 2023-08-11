@@ -22,9 +22,6 @@ public class NetworkMng : MonoBehaviourPunCallbacks
         }
     }
 
-    private Vector3 introPos = new Vector3(35.5f, 0.2f, -52f);
-    private Vector3 mainPos = new Vector3(142.33f, 1.02f, 28.86f);
-
     [SerializeField] GameObject playerPrefab;
 
     private void Awake()
@@ -80,7 +77,7 @@ public class NetworkMng : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         GameMng.I.Log("Room Join Failed", "NetworkMng");
-        
+
         PhotonNetwork.CreateRoom(SceneManager.GetActiveScene().name);
     }
 
@@ -115,13 +112,27 @@ public class NetworkMng : MonoBehaviourPunCallbacks
 
     #endregion
 
+    private Vector3 introPos = new Vector3(35.5f, 0.2f, -52f);
+    private Vector3 mainPos = new Vector3(142.33f, 1.02f, 28.86f);
+    private Vector3 cvsPos = new Vector3(4.36f, 0.0f, 28.0f);
+
     /// <summary>
     /// 서버(room 접속) 성공시 player생성
     /// </summary>
     IEnumerator CreatePlayer()
     {
-        PhotonNetwork.Instantiate("Player", new Vector3(35.5f, 0.2f, -52f), Quaternion.identity, 0);
-
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "IntroScene":
+                PhotonNetwork.Instantiate("Player", introPos, Quaternion.identity, 0);
+                break;
+            case "MainScene":
+                PhotonNetwork.Instantiate("Player", mainPos, Quaternion.identity, 0);
+                break;
+            case "ConvienceStoreScene":
+                PhotonNetwork.Instantiate("Player", cvsPos, Quaternion.identity, 0);
+                break;
+        }
         yield return null;
     }
 

@@ -74,17 +74,17 @@ public class UI_Intro : UI_Base
     }
     void PinNumber(string text)
     {
-        try
-        {
+        // try
+        // {
             if (text.Substring(0, 1) != "0")
                 inputs[7].text = $"{uint.Parse(text):##/##}";
             else
                 inputs[7].text = $"{uint.Parse(text):0#/##}";
-        }
-        catch
-        {
-            inputs[7].text = text;
-        }
+        // }
+        // catch
+        // {
+            // inputs[7].text = text;
+        // }
     }
 
     // 태양이가 추가할 내용 : 데이터가 있으면 정보 입력 과정 스킵. *****

@@ -41,7 +41,7 @@ public class GameMng : MonoBehaviour
     {
         int layerMask = 1 << LayerMask.NameToLayer("Object");
         RaycastHit hit;
-        if (Physics.Raycast(pos.position, pos.forward, out hit, 1000.0f, layerMask))
+        if (Physics.Raycast(pos.position, pos.forward, out hit, 10.0f, layerMask))
         {
             return hit;
         }
@@ -50,6 +50,10 @@ public class GameMng : MonoBehaviour
     }
 
     public int totalPrice = 0;
+
+    public ProductScriptable productObjectData;
+
+    public Camera mainCamera;
 
     #region Debug Console
 

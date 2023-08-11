@@ -57,7 +57,7 @@ public abstract class UI_Base : MonoBehaviour
     public void BindClickEvent(GameObject go, Action<PointerEventData> action)
     {
         // TODO: 이거 테스트 해봐야함
-        // Util.GetOrAddComponent<UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster>(go);
+        Util.GetOrAddComponent<UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster>(go);
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
         evt.OnClickHandler = null;

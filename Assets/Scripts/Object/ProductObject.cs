@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Photon.Pun.PhotonView))]
 [RequireComponent(typeof(Photon.Pun.PhotonTransformView))]
 [RequireComponent(typeof(XRGrabInteractable))]
+[RequireComponent(typeof(BoxCollider))]
 
 public class ProductObject : MonoBehaviour
 {
@@ -15,21 +16,38 @@ public class ProductObject : MonoBehaviour
     PhotonView view;
     XRGrabInteractable garbInteractable;
     #endregion
+    
+    [SerializeField] ProductName productName;
 
-    Vector3 firstPos = Vector3.zero;        // 시작(생성) 위치
+    [SerializeField] Vector3 firstPos = Vector3.zero;        // 시작(생성) 위치
+    [SerializeField] Quaternion firstRotation = Quaternion.identity;
+    [SerializeField] Vector3 firstScale = Vector3.zero;
+
+    Rigidbody rig = null;
 
     /// <summary>
     /// 들고있는지 확인
     /// </summary>
     public bool isPicked
     {
-        get{
+        get
+        {
             return garbInteractable.isSelected;
         }
     }
 
     private void Start()
     {
+        rig = GetComponent<Rigidbody>();
+        rig.constraints = RigidbodyConstraints.FreezeAll;
+
+        gameObject.name = GameMng.I.productObjectData.name[(int)productName];
+
+        this.gameObject.layer = 3;      // 레이어 설정
+        firstPos = transform.position;      // 초기 위치 설정
+        firstRotation = transform.rotation;     // 초기 회전값 설정
+        firstScale = transform.localScale;
+
         view = gameObject.GetComponent<PhotonView>();
         garbInteractable = gameObject.GetComponent<XRGrabInteractable>();
 
@@ -39,7 +57,12 @@ public class ProductObject : MonoBehaviour
     private void Update()
     {
         if (isPicked)
+        {
+            Debug.Log("Picked");
             view.RPC("GrabNetworkMove", RpcTarget.AllViaServer, transform.position, transform.rotation);
+            rig.constraints = RigidbodyConstraints.None;
+            this.transform.localScale = firstScale;
+        }
     }
 
     [PunRPC]
@@ -52,9 +75,19 @@ public class ProductObject : MonoBehaviour
     /// <summary>
     ///  떨어졌을때 위치 초기화
     /// </summary>
-    void ResetPosition()
+    IEnumerator ResetPosition()
     {
+        yield return new WaitForSecondsRealtime(5.0f);
         this.transform.position = firstPos;
-        this.transform.rotation = Quaternion.identity;
+        this.transform.rotation = firstRotation;
+        this.transform.localScale = firstScale;
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if(other.collider.CompareTag("Floor"))
+        {
+            StartCoroutine(ResetPosition());
+            rig.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 }

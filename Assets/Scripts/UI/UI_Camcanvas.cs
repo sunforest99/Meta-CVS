@@ -12,7 +12,6 @@ public class UI_Camcanvas : UI_Base
     UnityEngine.UI.RawImage roullette;
     float rotSpeed = 0.0f;
     bool rotState = false;
-
     public override void Init()
     {
         coinText = Get<TMPro.TextMeshProUGUI>("TotalCoin");
@@ -36,12 +35,19 @@ public class UI_Camcanvas : UI_Base
     /// </summary>
     void Update()
     {
-        coinText.text = "Coin : " + GameMng.I.coinCount; 
-        if(GameMng.I.coinCount >= 0) {
-            if(rotSpeed == 300f)
+        if (GameMng.I.mainCamera != null)
+        {
+            this.gameObject.transform.position = GameMng.I.mainCamera.transform.position + (GameMng.I.mainCamera.transform.forward * 10.0f);
+            this.gameObject.transform.rotation = GameMng.I.mainCamera.transform.rotation;
+        }
+        coinText.text = "Coin : " + GameMng.I.coinCount;
+        if (GameMng.I.coinCount >= 0)
+        {
+            if (rotSpeed == 300f)
                 roullette.gameObject.transform.Rotate(0, 0, rotSpeed * Time.deltaTime);
         }
-        if(rotState == false && rotSpeed != 0.0f) {
+        if (rotState == false && rotSpeed != 0.0f)
+        {
             rotSpeed -= 1f;
             roullette.gameObject.transform.Rotate(0, 0, rotSpeed * Time.deltaTime);
         }
@@ -50,7 +56,8 @@ public class UI_Camcanvas : UI_Base
     /// <summary>
     ///    룰렛 돌리는 함수
     /// </summary>
-    public void RollEvent(PointerEventData eventData) {
+    public void RollEvent(PointerEventData eventData)
+    {
         rotSpeed = 300f;
         rotState = true;
     }
@@ -74,10 +81,16 @@ public class UI_Camcanvas : UI_Base
         roullette.gameObject.SetActive(true);
     }
 
-    public void QuitEvent(PointerEventData eventData) {
+    public void QuitEvent(PointerEventData eventData)
+    {
         roll.gameObject.SetActive(false);
         stop.gameObject.SetActive(false);
         quit.gameObject.SetActive(false);
         roullette.gameObject.SetActive(false);
+    }
+
+    public void EnterCVS()
+    {
+        LoadingScene.Load("ConvienceStoreScene");
     }
 }

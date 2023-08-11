@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] UI_ProductInfo productUI;
 
-    [SerializeField] GameObject mainCamera;
+    [SerializeField] Camera mainCamera;
 
     PhotonView view = null;
 
@@ -38,10 +38,14 @@ public class Player : MonoBehaviour
         if (view.IsMine)
         {
             this.gameObject.name = "<isMinePlayer>";
-            leftTriggerInput.uiPressAction.action.started += Started;
-            rightTriggerInput.uiPressAction.action.started += Started;
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ConvienceStoreScene")
+            {
+                leftTriggerInput.uiPressAction.action.started += Started;
+                rightTriggerInput.uiPressAction.action.started += Started;
+            }
 
-            mainCamera.SetActive(true);
+            mainCamera.gameObject.SetActive(true);
+            GameMng.I.mainCamera = this.mainCamera;
         }
         else
         {
@@ -57,7 +61,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        if (view.IsMine)
+        if (view.IsMine && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "ConvienceStoreScene")
         {
             leftTriggerInput.uiPressActionValue.action.started -= Started;
             rightTriggerInput.uiPressActionValue.action.started -= Started;
@@ -90,15 +94,16 @@ public class Player : MonoBehaviour
     /// <summary>
     /// 상품정보 표시 UI 세팅
     /// </summary>
-    /// <param name="constrollTrans">컨트롤러 Transform</param>
-    void SetProductUI(Transform constrollTrans)
+    /// <param name="controllerTrans">컨트롤러 Transform</param>
+    void SetProductUI(Transform controllerTrans)
     {
-        if (GameMng.I.Raycast(constrollTrans) != null)
+        if (GameMng.I.Raycast(controllerTrans) != null)
         {
             productUI.gameObject.SetActive(true);
-            productUI.transform.parent = constrollTrans;
-            productUI.transform.position = constrollTrans.position + new Vector3(0, 2.0f, 2.0f);
-            productUI.AddUiInfo(GameMng.I.Raycast(constrollTrans)?.transform.name);
+            productUI.transform.parent = controllerTrans;
+            productUI.transform.position = controllerTrans.position + (controllerTrans.up + controllerTrans.forward);
+            productUI.transform.rotation = controllerTrans.rotation;
+            productUI.AddUiInfo(GameMng.I.Raycast(controllerTrans)?.transform.name);
         }
     }
 }
