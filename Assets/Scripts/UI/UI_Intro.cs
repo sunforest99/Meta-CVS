@@ -15,6 +15,7 @@ public class UI_Intro : UI_Base
     Dictionary<string, VirtualTextInputBox> inputBox = new Dictionary<string, VirtualTextInputBox>();
 
     [SerializeField] VirtualKeyboard keyboard;
+    [SerializeField] GameObject logo;
 
     public override void Init()
     {
@@ -152,6 +153,7 @@ public class UI_Intro : UI_Base
             {
                 inputs[i].gameObject.SetActive(true);
             }
+            logo.SetActive(false);
         }
         else
         {
@@ -165,6 +167,7 @@ public class UI_Intro : UI_Base
             {
                 inputs[i].gameObject.SetActive(false);
             }
+            logo.SetActive(true);
         }
     }
 }
