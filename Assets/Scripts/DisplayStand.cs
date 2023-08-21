@@ -26,6 +26,7 @@ public class DisplayStand : MonoBehaviour
         // 옆은 다른 품목
         spawnSizeX.x = (boxCol.bounds.max.x - boxCol.bounds.min.x) / 4;
         spawnSizeZ.z = (boxCol.bounds.max.z - boxCol.bounds.min.z) / 4;
+        
         // 앞쪽, 왼쪽부터 진열되도록 하기.
         spawnPoint.position = new Vector3(boxCol.bounds.center.x - boxCol.bounds.extents.x, boxCol.bounds.center.y + 1, boxCol.bounds.min.z);
         Debug.Log($"X : {spawnSizeX}, Z : {spawnSizeZ}, \nCenter: {boxCol.bounds.center}, Extents: {boxCol.bounds.extents}");

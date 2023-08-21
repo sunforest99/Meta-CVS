@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// TODO 적용하면 지우기
+// 룰렛 돌리기/멈추기/그만두기 버튼 눌리게 하기 -> 스크립트 적용해야함
+
 public class UI_Camcanvas : UI_Base
 {
     [SerializeField] TMPro.TextMeshProUGUI coinText;

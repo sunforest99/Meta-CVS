@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// TODO : <앞으로 수정할 내용>
+// 1. 전화번호 '-' 구분자 입력안됨
+// 2. 카드 만료일 '/' 구분자 입력안됨
+
 public class UI_Intro : UI_Base
 {
     UnityEngine.UI.Button start;
@@ -11,8 +15,6 @@ public class UI_Intro : UI_Base
     UnityEngine.UI.Button setting;
     UnityEngine.UI.Button previous;
     TMPro.TMP_InputField[] inputs = new TMPro.TMP_InputField[10];
-
-    // Dictionary<string, VirtualTextInputBox> inputBox = new Dictionary<string, VirtualTextInputBox>();
 
     [SerializeField] GameObject keyboard;
     [SerializeField] GameObject logo;
@@ -28,12 +30,7 @@ public class UI_Intro : UI_Base
         for (int i = 0; i < 10; i++)
         {
             inputs[i] = Get<TMPro.TMP_InputField>($"Input{i + 1}");
-            // inputBox.Add(inputs[i].name, inputs[i].GetComponent<VirtualTextInputBox>());
-
             inputs[i].gameObject.SetActive(false);
-            // inputs[i].onSelect.AddListener()
-
-            // BindClickEvent(inputs[i].gameObject, FieldClick);
         }
 
         keyboard.SetActive(false);
@@ -48,19 +45,7 @@ public class UI_Intro : UI_Base
         BindClickEvent(setting.gameObject, SettingEvt);
         BindClickEvent(previous.gameObject, PreviousEvt);
         BindClickEvent(start.gameObject, StartBtn);
-
     }
-
-    // void FieldClick(PointerEventData eventData)
-    // {
-    //     for (int i = 0; i < inputs.Length; i++)
-    //     {
-    //         if (inputs[i].isFocused)        // 여기 안먹음
-    //         {
-    //             keyboard.TextInputBox = inputBox[inputs[i].name];
-    //         }
-    //     }
-    // }
 
     // 휴대폰 번호 사이에 '-' 자동 삽입
     void PhoneNumber(string text)
@@ -89,7 +74,6 @@ public class UI_Intro : UI_Base
         }
     }
 
-    // 태양이가 추가할 내용 : 데이터가 있으면 정보 입력 과정 스킵. *****
     void StartBtn(PointerEventData eventData)
     {
         int count = 0;

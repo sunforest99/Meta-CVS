@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO <앞으로 추가할 내용>
+// 1. 게임
+// 2. 사장님들 전용 앱 인터페이스
+// 3. oculus iap 결제 서비스
+// 4. 룰렛 컨텐츠 구현
+// 5. photon 보이스챗
+// 6. 밀키스 같은 물품들 자세하게 모델링
+// 7. 튜토리얼 / 설정 
+// 8. 장바구니 보기 버튼 추가하기
+
 public class GameMng : MonoBehaviour
 {
     static GameMng _instance;

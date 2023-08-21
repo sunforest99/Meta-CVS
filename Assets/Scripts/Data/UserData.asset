@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: UserData
   m_EditorClassIdentifier: 
   userData:
-    name: 1
-    phone: 1
-    address: 1
-    cardnum: 1
-    exp: 1
-    cvc: 1
-    pin: 1
+    name: 
+    phone: 
+    address: 
+    cardnum: 
+    exp: 
+    cvc: 
+    pin: 
