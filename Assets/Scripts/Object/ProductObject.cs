@@ -78,6 +78,7 @@ public class ProductObject : MonoBehaviour
     IEnumerator ResetPosition()
     {
         yield return new WaitForSecondsRealtime(5.0f);
+        rig.constraints = RigidbodyConstraints.FreezeAll;
         this.transform.position = firstPos;
         this.transform.rotation = firstRotation;
         this.transform.localScale = firstScale;
@@ -87,7 +88,7 @@ public class ProductObject : MonoBehaviour
         if(other.collider.CompareTag("Floor"))
         {
             StartCoroutine(ResetPosition());
-            rig.constraints = RigidbodyConstraints.FreezeAll;
+            // rig.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 }

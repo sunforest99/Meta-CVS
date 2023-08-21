@@ -424,7 +424,7 @@ RectTransform:
   m_GameObject: {fileID: 428218181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 275690808}
@@ -434,7 +434,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 600}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &428218183
 MonoBehaviour:
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &428218185
 Canvas:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ Canvas:
   m_GameObject: {fileID: 428218181}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61f89f930da4854a91dddd19c13172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vkKeyboard: {fileID: 0}
 --- !u!114 &516738109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,7 +1280,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00024414062, y: -0.000030517578}
-  m_SizeDelta: {x: 0, y: 16.76}
+  m_SizeDelta: {x: 0, y: 15.01}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &901661708
 MonoBehaviour:
@@ -1903,7 +1904,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1219472916}
   m_HandleRect: {fileID: 1219472915}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1958,6 +1959,46 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 1ff7943782a34ba48a47480aa87d40ac, type: 3}
+    - target: {fileID: 162631185, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 166940208, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 808137877, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 953633120, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 1191791751, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 1375276969, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 1749410116, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 1814222465, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 2049748278, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
+    - target: {fileID: 2147001336, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
+      propertyPath: vkKeyboard
+      value: 
+      objectReference: {fileID: 4604887531228425217}
     - target: {fileID: 177777591265283114, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2045,7 +2086,7 @@ PrefabInstance:
     - target: {fileID: 177777591265283118, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
       propertyPath: keyboard
       value: 
-      objectReference: {fileID: 4604887531228425217}
+      objectReference: {fileID: 4604887531228425222}
     - target: {fileID: 177777591265283121, guid: 579a58c6236832a47b2175ab2e7e98b8, type: 3}
       propertyPath: m_Name
       value: IntroUI2
@@ -2175,6 +2216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc45131593f3b54b82e4b16bc83ac06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userDataSaveFile: {fileID: 11400000, guid: 804259dc967e18744945904241e165c2, type: 2}
   coinCount: 0
   totalPrice: 0
   productObjectData: {fileID: 11400000, guid: 491e3903494b53f42ae1ed48161515aa, type: 2}
@@ -12370,6 +12412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61f89f930da4854a91dddd19c13172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vkKeyboard: {fileID: 0}
 --- !u!222 &4604887531212152594
 CanvasRenderer:
   m_ObjectHideFlags: 0

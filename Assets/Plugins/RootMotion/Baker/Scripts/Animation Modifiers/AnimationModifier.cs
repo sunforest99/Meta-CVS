@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace RootMotion
 {
-
     public abstract class AnimationModifier : MonoBehaviour
     {
         protected Animator animator;

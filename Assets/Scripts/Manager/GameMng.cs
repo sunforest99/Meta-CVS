@@ -27,9 +27,10 @@ public class GameMng : MonoBehaviour
     }
 
     public DataMng dataMng = new DataMng();
+    public UserDataScriptable userDataSaveFile;
 
     public Dictionary<string, int> basketDict = new Dictionary<string, int>();
-    
+
     public int coinCount;
 
     /// <summary>
@@ -84,19 +85,28 @@ public class GameMng : MonoBehaviour
     public void ShowLog()
     {
         debugConsole.SetActive(!debugConsole.activeSelf ? true : false);
+        debugConsole.transform.position = I.mainCamera.transform.position + (GameMng.I.mainCamera.transform.forward * 10.0f);
+        debugConsole.transform.rotation = I.mainCamera.transform.rotation;
         scroll.value = 0.0f;
     }
+    #endregion
 
+    #region 빌트 테스트
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             ShowLog();
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             LoadingScene.Load("ConvienceStoreScene");
         }
+    }
+
+    public void OnApplicationQuit()
+    {
+        userDataSaveFile.DataClear();
     }
 
     #endregion

@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform rightTransform;
 
     [SerializeField] UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.DynamicMoveProvider movement;
+    [SerializeField] InputActionProperty debugBtn;
     #endregion
 
     [SerializeField] UI_ProductInfo productUI;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         productUI.baseParent = this.transform;
+        debugBtn.action.started += OpenDebug;
     }
 
     /// <summary>
@@ -89,6 +91,12 @@ public class Player : MonoBehaviour
             Debug.Log("left");
             SetProductUI(leftTransform);
         }
+    }
+
+    void OpenDebug(InputAction.CallbackContext context)
+    {
+        GameMng.I.ShowLog();
+        Debug.Log("아아아아아");
     }
 
     /// <summary>

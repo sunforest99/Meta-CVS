@@ -3,6 +3,13 @@ using System.Collections;
 
 public class VirtualTextInputBox : MonoBehaviour {
 
+    [SerializeField]VirtualKeyboard vkKeyboard = null;
+
+    void FieldClick(string text)
+    {
+        vkKeyboard.TextInputBox = this;
+    }
+    
 	AutomateKR		mAutomateKR = new AutomateKR();
     protected TMPro.TMP_InputField mTextField = null;
     public string TextField
@@ -26,6 +33,7 @@ public class VirtualTextInputBox : MonoBehaviour {
 
     void Start () {
         mTextField = GetComponent<TMPro.TMP_InputField>();
+        mTextField.onSelect.AddListener(FieldClick);
 	}
 	
 	void Update () {

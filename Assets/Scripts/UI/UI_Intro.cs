@@ -11,10 +11,10 @@ public class UI_Intro : UI_Base
     UnityEngine.UI.Button setting;
     UnityEngine.UI.Button previous;
     TMPro.TMP_InputField[] inputs = new TMPro.TMP_InputField[10];
-    
-    Dictionary<string, VirtualTextInputBox> inputBox = new Dictionary<string, VirtualTextInputBox>();
 
-    [SerializeField] VirtualKeyboard keyboard;
+    // Dictionary<string, VirtualTextInputBox> inputBox = new Dictionary<string, VirtualTextInputBox>();
+
+    [SerializeField] GameObject keyboard;
     [SerializeField] GameObject logo;
 
     public override void Init()
@@ -28,14 +28,15 @@ public class UI_Intro : UI_Base
         for (int i = 0; i < 10; i++)
         {
             inputs[i] = Get<TMPro.TMP_InputField>($"Input{i + 1}");
-            inputBox.Add(inputs[i].name, inputs[i].GetComponent<VirtualTextInputBox>());
-            
-            inputs[i].gameObject.SetActive(false);
+            // inputBox.Add(inputs[i].name, inputs[i].GetComponent<VirtualTextInputBox>());
 
-            BindClickEvent(inputs[i].gameObject, FieldClick);
+            inputs[i].gameObject.SetActive(false);
+            // inputs[i].onSelect.AddListener()
+
+            // BindClickEvent(inputs[i].gameObject, FieldClick);
         }
 
-        keyboard.gameObject.SetActive(false);
+        keyboard.SetActive(false);
         previous.gameObject.SetActive(false);
         start.gameObject.SetActive(false);
 
@@ -50,16 +51,16 @@ public class UI_Intro : UI_Base
 
     }
 
-    void FieldClick(PointerEventData eventData)
-    {
-        for(int i = 0; i < inputs.Length; i++)
-        {
-            if(inputs[i].isFocused)
-            {
-                keyboard.TextInputBox = inputBox[inputs[i].name];
-            }
-        }
-    }
+    // void FieldClick(PointerEventData eventData)
+    // {
+    //     for (int i = 0; i < inputs.Length; i++)
+    //     {
+    //         if (inputs[i].isFocused)        // 여기 안먹음
+    //         {
+    //             keyboard.TextInputBox = inputBox[inputs[i].name];
+    //         }
+    //     }
+    // }
 
     // 휴대폰 번호 사이에 '-' 자동 삽입
     void PhoneNumber(string text)
@@ -75,17 +76,17 @@ public class UI_Intro : UI_Base
     }
     void PinNumber(string text)
     {
-        // try
-        // {
-            if (text.Substring(0, 1) != "0")
+        try
+        {
+            if (text[0] != '0')
                 inputs[7].text = $"{uint.Parse(text):##/##}";
             else
                 inputs[7].text = $"{uint.Parse(text):0#/##}";
-        // }
-        // catch
-        // {
-            // inputs[7].text = text;
-        // }
+        }
+        catch
+        {
+            inputs[7].text = text;
+        }
     }
 
     // 태양이가 추가할 내용 : 데이터가 있으면 정보 입력 과정 스킵. *****
@@ -93,12 +94,13 @@ public class UI_Intro : UI_Base
     {
         int count = 0;
         string cardnumFull = inputs[3].text + "-" + inputs[4].text + "-" + inputs[5].text + "-" + inputs[6].text;
-        for(int i = 0; i<inputs.Length; i++) {
+        for (int i = 0; i < inputs.Length; i++)
+        {
             string content = inputs[i].text;
-            if(content.Length == 0)
+            if (content.Length == 0)
                 count += 1;
         }
-        if(count > 0) return;
+        if (count > 0) return;
         GameMng.I.dataMng.userData = new UserData(inputs[0].text, inputs[1].text, inputs[2].text, cardnumFull, inputs[7].text, inputs[8].text, inputs[9].text);
         GameMng.I.dataMng.SaveUserData();
         LoadingScene.Load("MainScene");
@@ -106,20 +108,24 @@ public class UI_Intro : UI_Base
 
     void EnterEvt(PointerEventData eventData)
     {
-        try
+        if (!GameMng.I.userDataSaveFile.CheckNullOrEmpty())
         {
-            GameMng.I.dataMng.LoadUserDataFromJson();
-            LoadingScene.Load("MainScene");
-        }
-        catch (System.IO.FileNotFoundException)
-        {
-            Debug.LogWarning($"Load User File Not Found");
             btnActive();
         }
-        catch (System.Exception e)
+        else
         {
-            Debug.LogError($"Load User Data Failed \n Exception : {e}");
+            LoadingScene.Load("MainScene");
         }
+
+        // catch (System.IO.FileNotFoundException)      // 안먹히고
+        // {
+        //     Debug.LogWarning($"Load User File Not Found");
+        //     btnActive();
+        // }
+        // catch (System.Exception e)
+        // {
+        //     Debug.LogError($"Load User Data Failed \n Exception : {e}");
+        // }
     }
 
     void TutorialEvt(PointerEventData eventData)
@@ -148,7 +154,7 @@ public class UI_Intro : UI_Base
             setting.gameObject.SetActive(false);
             previous.gameObject.SetActive(true);
             start.gameObject.SetActive(true);
-            keyboard.gameObject.SetActive(true);
+            keyboard.SetActive(true);
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i].gameObject.SetActive(true);
@@ -162,7 +168,7 @@ public class UI_Intro : UI_Base
             setting.gameObject.SetActive(true);
             previous.gameObject.SetActive(false);
             start.gameObject.SetActive(false);
-            keyboard.gameObject.SetActive(false);
+            keyboard.SetActive(false);
             for (int i = 0; i < inputs.Length; i++)
             {
                 inputs[i].gameObject.SetActive(false);

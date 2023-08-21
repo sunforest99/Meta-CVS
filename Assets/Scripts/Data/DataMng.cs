@@ -9,20 +9,24 @@ public class DataMng
 {
     public UserData userData = new UserData();
     // json file (유저 정보) 내보내기
+    // public void SaveUserData()
+    // {
+    //     Debug.Log(userData.name);
+    //     string jsonData = JsonUtility.ToJson(userData, true);
+    //     string path = Path.Combine(Application.dataPath, "userData.json");
+    //     File.WriteAllText(path, jsonData);
+    // }
     public void SaveUserData()
     {
-        Debug.Log(userData.name);
-        string jsonData = JsonUtility.ToJson(userData, true);
-        string path = Path.Combine(Application.dataPath, "userData.json");
-        File.WriteAllText(path, jsonData);
+        GameMng.I.userDataSaveFile.userData = userData;
     }
 
-    public void LoadUserDataFromJson()
-    {
-        string path = Path.Combine(Application.dataPath, "userData.json");
-        string jsonData = File.ReadAllText(path);
-        userData = JsonUtility.FromJson<UserData>(jsonData);
-    }
+    // public void LoadUserDataFromJson()
+    // {
+    //     string path = Path.Combine(Application.dataPath, "userData.json");
+    //     string jsonData = File.ReadAllText(path);
+    //     userData = JsonUtility.FromJson<UserData>(jsonData);
+    // }
 
     private ProductData productData = new ProductData();
     public Dictionary<string, Product> objectdic = new Dictionary<string, Product>();
